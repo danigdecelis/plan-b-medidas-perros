@@ -130,7 +130,7 @@ a{color:var(--chalk)}
 <header>
   <div class="eyebrow">Plan B · Producto propio · Deberes de Giuli</div>
   <h1>Medidas de los perros</h1>
-  <p class="lead">Cómo medir a Katika, Max, Is y Milo para patronar las tres primeras prendas (calzón de celo, hoodie y abriguito) y dónde apuntarlo. Funciona igual desde el móvil o desde la compu.</p>
+  <p class="lead">Cómo medir a Catica, Max, Ais y Milo para patronar las tres primeras prendas (calzón de celo, hoodie y abriguito) y dónde apuntarlo. Funciona igual desde el móvil o desde la compu.</p>
 </header>
 
 <section id="plan">
@@ -209,7 +209,7 @@ a{color:var(--chalk)}
   <form id="f" autocomplete="off">
     <div class="row">
       <label class="f" for="dog">Perro
-        <select id="dog"><option>Katika</option><option>Max</option><option>Is</option><option>Milo</option><option value="__otro">Otro…</option></select>
+        <select id="dog"><option>Catica</option><option>Max</option><option>Ais</option><option>Milo</option><option value="__otro">Otro…</option></select>
       </label>
       <label class="f" for="dogOther" id="dogOtherWrap" hidden>Nombre
         <input id="dogOther" type="text" placeholder="Nombre del perro">
@@ -434,7 +434,7 @@ function collect(){
     raza:$('raza').value.trim(), pelo:$('pelo').value, notas:$('notas').value.trim(), medidas};
 }
 function fill(d){
-  const known=['Katika','Max','Is','Milo'];
+  const known=['Catica','Max','Ais','Milo'];
   if(known.includes(d.perro)){ $('dog').value=d.perro; $('dogOtherWrap').hidden=true; }
   else { $('dog').value='__otro'; $('dogOtherWrap').hidden=false; $('dogOther').value=d.perro||''; }
   $('fecha').value=d.fecha||today(); $('peso').value=d.peso!=null?String(d.peso).replace('.',','):'';
@@ -447,7 +447,7 @@ function fill(d){
 }
 function clearForm(){
   editingId=null;
-  fill({perro:$('dog').value==='__otro'?'Katika':$('dog').value, fecha:today(), medidas:{}});
+  fill({perro:$('dog').value==='__otro'?'Catica':$('dog').value, fecha:today(), medidas:{}});
   $('peso').value=''; $('notas').value='';
   $('saveBtn').textContent='Guardar medición';
 }
@@ -522,7 +522,7 @@ function latestFor(name){
   return sessions.filter(s=>s.d.perro===name).sort((a,b)=> (b.d.fecha||'').localeCompare(a.d.fecha||'') || (b.d.guardado||'').localeCompare(a.d.guardado||''))[0]?.d;
 }
 function render(){
-  const names=[...new Set(['Katika','Max','Is','Milo',...sessions.map(s=>s.d.perro)])].filter(n=>sessions.some(s=>s.d.perro===n));
+  const names=[...new Set(['Catica','Max','Ais','Milo',...sessions.map(s=>s.d.perro)])].filter(n=>sessions.some(s=>s.d.perro===n));
   const wrap=$('tableWrap');
   if(!names.length){ wrap.innerHTML='<div class="empty">Aquí aparecerá la tabla en cuanto se guarde la primera medición.</div>'; }
   else{
