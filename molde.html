@@ -761,7 +761,7 @@ function redraw(){
   $('warn').hidden=!(bad.length||w.length);
   $('warn').innerHTML=`Revisa las medidas antes de cortar: ${[...w,...bad.map(c=>c.what.split('.')[0].toLowerCase())].map(esc).join('; ')}.`;
   $('lamOut').innerHTML=`<div class="lamwrap" id="lamwrap" title="Toca para ampliar">${lamina(result,E)}</div>`;
-  sizePieces(); fit();
+  sizePieces(); fit(); schedulePng();
 }
 function lamina(r,E){
   const g=GARMENTS[garment], name=dogName(), f=n=>fmt1(n);
@@ -805,16 +805,33 @@ function fit(){ const w=$('lamwrap'), l=$('lam'); if(!w||!l) return; const sc=zo
 window.addEventListener('resize',fit);
 $('lamOut').addEventListener('click',e=>{ if(!e.target.closest('#lamwrap')) return; zoom=!zoom; fit(); });
 
-/* descargar imagen (PNG) */
+/* imagen (PNG): en el móvil se abre el menú de compartir («Guardar imagen» va a la galería, o WhatsApp);
+   en la compu se descarga. La imagen se prepara en cuanto la lámina cambia, para que el menú de compartir
+   se abra al momento (el móvil solo lo permite justo después del toque). */
 function loadH2C(){ return window.html2canvas?Promise.resolve():new Promise((res,rej)=>{ const s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
+let pngBlob=null, pngKey='', pngTmr=null;
+const fileName=()=>`molde-${slug(GARMENTS[garment].name)}-${slug(dogName())}.png`;
+async function makePng(){ await loadH2C(); const l=$('lam'); if(!l) throw new Error('sin lámina'); const prev=l.style.transform; l.style.transform='none';
+  try{ const cv=await html2canvas(l,{scale:2,backgroundColor:'#fbfaf7',logging:false}); return await new Promise(r=>cv.toBlob(r,'image/png')); } finally{ l.style.transform=prev; fit(); } }
+function schedulePng(){ pngBlob=null; clearTimeout(pngTmr); if(!result) return; const key=$('lamOut').innerHTML.length+'|'+fileName();
+  pngTmr=setTimeout(async()=>{ try{ const b=await makePng(); pngBlob=b; pngKey=key; }catch(e){} },1200); }
+const canShareFiles=()=>{ try{ return !!(navigator.canShare&&navigator.canShare({files:[new File([new Blob(['x'])],'x.png',{type:'image/png'})]})); }catch(e){ return false; } };
+const isPhone=()=>matchMedia('(pointer:coarse)').matches;
+if(isPhone()&&canShareFiles()) $('png').textContent='Guardar o enviar imagen';
+function download(blob){ const a=document.createElement('a'); a.download=fileName(); a.href=URL.createObjectURL(blob); document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000); }
 $('png').addEventListener('click',async()=>{
   if(!result){ $('pngStatus').textContent='Primero hacen falta las medidas.'; return; }
-  $('pngStatus').className='status'; $('pngStatus').textContent='Preparando la imagen…';
-  try{ await loadH2C(); const l=$('lam'); const prev=l.style.transform; l.style.transform='none';
-    const cv=await html2canvas(l,{scale:2,backgroundColor:'#fbfaf7',logging:false}); l.style.transform=prev; fit();
-    const a=document.createElement('a'); a.download=`molde-${slug(GARMENTS[garment].name)}-${slug(dogName())}.png`; a.href=cv.toDataURL('image/png'); document.body.appendChild(a); a.click(); a.remove();
-    $('pngStatus').className='status ok'; $('pngStatus').textContent='Imagen descargada.'; }
-  catch(e){ $('pngStatus').className='status bad'; $('pngStatus').textContent='No se pudo crear la imagen en este aparato. Haz una captura de pantalla de la lámina.'; }
+  const st=$('pngStatus'); st.className='status';
+  try{
+    let blob=pngBlob; if(!blob){ st.textContent='Preparando la imagen…'; blob=await makePng(); pngBlob=blob; }
+    const file=new File([blob],fileName(),{type:'image/png'});
+    if(isPhone()&&navigator.canShare&&navigator.canShare({files:[file]})){
+      try{ await navigator.share({files:[file],title:`Molde de ${GARMENTS[garment].name.toLowerCase()} · ${dogName()}`}); st.className='status ok'; st.textContent='Listo. Si elegiste «Guardar imagen», está en la galería.'; return; }
+      catch(e){ if(e&&e.name==='AbortError'){ st.textContent=''; return; } if(e&&e.name==='NotAllowedError'){ st.textContent='Imagen lista: vuelve a tocar el botón.'; return; } }
+    }
+    download(blob); st.className='status ok';
+    st.textContent=isPhone()?'Descargada: está en Archivos › Descargas (no en la galería).':'Imagen descargada.';
+  }catch(e){ st.className='status bad'; st.textContent='No se pudo crear la imagen en este aparato. Haz una captura de pantalla de la lámina.'; }
 });
 /* imprimir a tamaño real */
 $('real').addEventListener('click',()=>{
