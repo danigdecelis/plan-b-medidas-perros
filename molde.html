@@ -12,14 +12,14 @@
   --paper:#F4F6F3; --paper-2:#FFFFFF; --grid:#E3E9E4; --grid-strong:#C9D3CB;
   --ink:#1E2940; --ink-soft:#56607A; --line:#C9D1CB;
   --tape:#F2C335; --tape-ink:#2B2410; --chalk:#2F63D0; --chalk-soft:#DCE6FA; --piece:rgba(242,195,53,.16);
-  --ok:#2E7D4F; --warn:#B4530F; --warn-bg:#FCEBD9;
+  --ok:#2E7D4F; --warn:#B4530F; --warn-bg:#FCEBD9; --dog:#C9B79C; --dog-2:#B19C7E; --dog-ink:#3B3226;
   --f-display:"Young Serif", Georgia, serif; --f-body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#151A22; --paper-2:#1D232E; --grid:#222936; --grid-strong:#2F3846; --ink:#E8ECF3; --ink-soft:#A3ACBD; --line:#343C4A;
-  --tape:#E9B92C; --tape-ink:#211B08; --chalk:#7FA6F5; --chalk-soft:#22314F; --ok:#6CC594; --warn:#F0A060; --warn-bg:#3A2716; color-scheme:dark}}
+  --tape:#E9B92C; --tape-ink:#211B08; --chalk:#7FA6F5; --chalk-soft:#22314F; --ok:#6CC594; --warn:#F0A060; --warn-bg:#3A2716; --dog:#6E6252; --dog-2:#5A4F42; --dog-ink:#EDE3D3; color-scheme:dark}}
 :root[data-theme="dark"]{--paper:#151A22; --paper-2:#1D232E; --grid:#222936; --grid-strong:#2F3846; --ink:#E8ECF3; --ink-soft:#A3ACBD; --line:#343C4A;
-  --tape:#E9B92C; --tape-ink:#211B08; --chalk:#7FA6F5; --chalk-soft:#22314F; --ok:#6CC594; --warn:#F0A060; --warn-bg:#3A2716; color-scheme:dark}
+  --tape:#E9B92C; --tape-ink:#211B08; --chalk:#7FA6F5; --chalk-soft:#22314F; --ok:#6CC594; --warn:#F0A060; --warn-bg:#3A2716; --dog:#6E6252; --dog-2:#5A4F42; --dog-ink:#EDE3D3; color-scheme:dark}
 *{box-sizing:border-box} [hidden]{display:none!important}
 html,body{margin:0}
 body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.5}
@@ -38,12 +38,28 @@ h1{font-family:var(--f-display);font-weight:400;font-size:clamp(26px,5vw,38px);l
 .lbl{font-size:14px;color:var(--ink-soft)}
 input{font:inherit;color:var(--ink);background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
 input:focus-visible,button:focus-visible{outline:3px solid var(--chalk);outline-offset:1px}
-.meas{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px 12px}
-.m{display:grid;grid-template-columns:1fr 84px 30px;gap:6px;align-items:center;border-bottom:1px solid var(--line);padding:4px 0}
+.meas{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px 12px}
+.m{display:grid;grid-template-columns:1fr 84px auto;gap:6px;align-items:center;border-bottom:1px solid var(--line);padding:4px 0}
+.m.open{grid-column:1/-1}
 .m label{font-size:15px;line-height:1.25}
 .m .num{font-family:var(--f-mono);font-size:17px;text-align:center;width:84px}
 .m .q{font:inherit;font-weight:700;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink-soft);cursor:pointer;padding:0}
-.m .help{grid-column:1/-1;font-size:13.5px;color:var(--ink-soft);background:var(--paper);border-radius:6px;padding:5px 8px}
+.m .q{width:auto;height:auto;border-radius:999px;padding:5px 10px;font-size:13px}
+.m .help{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:10px;background:var(--paper);border-radius:8px;padding:8px;font-size:14px;line-height:1.4}
+.m .help svg{width:100%;height:auto;display:block}
+.m .help dl{margin:0;display:grid;gap:3px} .m .help dt{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)} .m .help dd{margin:0 0 3px}
+.m .help .err dd{color:var(--warn)}
+@media (max-width:420px){.m .help{grid-template-columns:1fr}}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 14px;margin:0;padding:0;list-style:none;counter-reset:h}
+.how li{counter-increment:h;display:grid;grid-template-columns:26px 1fr;gap:8px;font-size:15px;line-height:1.4}
+.how li::before{content:counter(h);font-family:var(--f-mono);font-weight:600;width:24px;height:24px;border-radius:50%;background:var(--tape);color:var(--tape-ink);display:grid;place-items:center;font-size:13px}
+details.rules{background:var(--paper);border-radius:10px;padding:8px 12px;margin-bottom:10px;font-size:15px}
+details.rules summary{cursor:pointer;font-weight:700}
+.rgrid{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:12px;margin-top:8px;align-items:start}
+@media (max-width:620px){.rgrid{grid-template-columns:1fr}}
+.rgrid svg{width:100%;height:auto;display:block;background:var(--paper-2);border-radius:8px}
+.rgrid ol,.rgrid ul{margin:0 0 6px;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.lmk b{font-family:var(--f-mono);color:var(--chalk)}
 .actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
 button.b{font:inherit;font-weight:700;font-size:15px;border-radius:8px;padding:9px 14px;border:1px solid var(--ink);background:var(--ink);color:var(--paper-2);cursor:pointer}
 button.b.ghost{background:transparent;color:var(--ink)}
@@ -103,7 +119,15 @@ details.adj{font-size:15px} details.adj summary{cursor:pointer;color:var(--ink-s
 <div class="tape" aria-hidden="true"></div>
 <div class="wrap">
   <h1>Moldes de los perros</h1>
-  <p class="sub">Elige perro y prenda, escribe sus medidas y sale el molde con los centímetros.</p>
+  <p class="sub">El molde de cada perro, con sus centímetros, listo para trazar.</p>
+  <div class="card">
+    <ol class="how">
+      <li><span><b>Elige</b> perro y prenda.</span></li>
+      <li><span><b>Mide</b> con la cinta y escribe los cm. Si dudas, toca «cómo» y verás el dibujo.</span></li>
+      <li><span><b>Guarda</b>: las medidas quedan apuntadas para la próxima vez.</span></li>
+      <li><span><b>Descarga</b> la lámina o imprímela a tamaño real, y traza: punto por punto, «baja» por el doblez y «derecha» a escuadra.</span></li>
+    </ol>
+  </div>
 
   <div class="card">
     <h2><span class="n">1</span> Perro y prenda</h2>
@@ -118,7 +142,29 @@ details.adj{font-size:15px} details.adj summary{cursor:pointer;color:var(--ink-s
 
   <div class="card">
     <h2><span class="n">2</span> <span id="measTitle">Medidas</span></h2>
-    <p class="note" style="margin:0 0 8px">En centímetros, con la cinta apoyada y sin apretar. Toca <b>?</b> para ver dónde se mide.</p>
+    <details class="rules">
+      <summary>Antes de medir: 5 reglas y los puntos de referencia (1 minuto)</summary>
+      <div class="rgrid">
+        <div id="lmk"></div>
+        <div>
+          <ol>
+            <li><b>De pie</b>, con las cuatro patas rectas y la cabeza mirando al frente.</li>
+            <li><b>Cinta plana y apoyada</b>: que toque el pelo sin hundir la carne. Ni floja ni apretada.</li>
+            <li><b>Contornos rectos</b>, nunca en diagonal.</li>
+            <li><b>Al medio centímetro</b> (32,5, no «unos 32»). Si dudas, mide dos veces.</li>
+            <li><b>Si no se deja</b>: rodea con un cordón, pellízcalo y mide el cordón sobre la mesa.</li>
+          </ol>
+          <ul class="lmk note">
+            <li><b>1</b> Base del cuello: donde descansa el collar.</li>
+            <li><b>2</b> Cruz: lo más alto de los omóplatos.</li>
+            <li><b>3</b> Base de la cola: donde nace la cola.</li>
+            <li><b>4</b> Axila: el hueco detrás del codo.</li>
+            <li><b>5</b> Ingle: donde la pata trasera se une a la barriga.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+    <p class="note" style="margin:0 0 8px">En centímetros. Toca <b>cómo</b> para ver el dibujo de cada medida. <button type="button" class="b ghost" id="allHelp" style="padding:4px 10px;font-size:13px">Ver todas</button></p>
     <div class="meas" id="meas"></div>
     <div class="actions">
       <button type="button" class="b" id="save">Guardar medidas</button>
@@ -517,6 +563,124 @@ const GARMENTS={
     return {pieces:[pc],checks,seams,cut,warn:WARN};
   }}
 };
+/* ---------- Referencias para medir (copiadas de la página de medidas) ---------- */
+const HELPREF=(()=>{
+const MH = [
+ {id:'1',g:'T',n:'Contorno de cuello',fig:'side',p:['Hoodie','Abriguito'],
+  d:'En la base del cuello, donde descansa el collar.',
+  c:'Rodea el cuello con la cinta plana, sin apretar, perpendicular al cuello. Ni pegada a la barbilla ni bajada sobre los hombros.',
+  e:'Medir arriba, bajo la cabeza: sale menos y la prenda ahorca.',
+  s:'Escote del hoodie y del abriguito.'},
+ {id:'2',g:'T',n:'Contorno de pecho',fig:'side',p:['Hoodie','Abriguito','Calzón'],
+  d:'La parte más ancha de las costillas, justo detrás de las patas delanteras.',
+  c:'Pasa la cinta por detrás de los codos, recta. Muévela 1-2 cm adelante y atrás y quédate con la medida mayor.',
+  e:'Pasarla en diagonal o por delante de las patas.',
+  s:'La medida maestra: decide la talla de las tres prendas.'},
+ {id:'3',g:'T',n:'Largo de espalda',fig:'side',p:['Hoodie','Abriguito'],
+  d:'De la base del cuello (por arriba, donde pasó la cinta del cuello) a la base de la cola.',
+  c:'Cinta apoyada sobre el lomo siguiendo su curva, con la cabeza mirando al frente.',
+  e:'Cabeza agachada o levantada, o medir hasta la punta de la cola.',
+  s:'Largo de la prenda. Con el pecho, dice si es de cuerpo largo.'},
+ {id:'4',g:'T',n:'Contorno de cintura',fig:'side',p:['Calzón','Hoodie','Abriguito'],
+  d:'La parte más estrecha de la barriga, justo delante de las patas traseras.',
+  c:'Igual que el pecho: recta y apoyada.',
+  e:'Medir después de comer.',
+  s:'Cintura del calzón y ajuste trasero del hoodie y el abriguito.'},
+ {id:'5',g:'T',n:'Largo de pecho delantero',fig:'side',p:['Hoodie','Abriguito'],
+  d:'De la base del cuello por delante (donde la cinta del cuello pasa por la garganta) al punto entre las patas delanteras.',
+  c:'Cinta por el centro del pecho, siguiendo su curva.',
+  e:'Empezar en la barbilla.',
+  s:'Dónde va el agujero de la pata y lo hondo que es el escote.'},
+ {id:'6',g:'T',n:'Separación de patas delanteras',fig:'front',p:['Hoodie','Abriguito'],
+  d:'Por delante, de la cara interna de una pata delantera a la otra, justo donde nacen del pecho.',
+  c:'En recta, sin rodear nada. En los muy pequeños, con regla.',
+  e:'Medir más abajo, a la altura de los codos.',
+  s:'Ancho de la pieza del pecho. Aquí se notan los de pecho ancho.'},
+ {id:'7',g:'T',n:'Contorno de pata delantera',fig:'side',p:['Hoodie','Abriguito'],
+  d:'La parte más gruesa de la pata delantera, pegada al cuerpo, justo bajo la axila.',
+  c:'Rodéala con la cinta plana.',
+  e:'Medir a la altura del codo o más abajo: sale menos y la pata no pasa.',
+  s:'Tamaño del agujero de la pata (sisa), y ancho de la manga si la lleva.'},
+ {id:'8',g:'T',n:'Largo de barriga',fig:'side',p:['Hoodie','Abriguito'],
+  d:'Del punto entre las patas delanteras (donde acabó la 5), por debajo, hasta: en machos, justo antes del pene; en hembras, hasta donde empiezan las patas traseras.',
+  c:'Cinta apoyada en la barriga siguiendo su curva.',
+  e:'En un macho, pasarse del pene: la prenda se moja al hacer pis.',
+  s:'Hasta dónde llega la prenda por debajo.'},
+ {id:'9',g:'K',n:'Contorno de muslo',fig:'side',p:['Calzón'],
+  d:'La parte más gruesa del muslo trasero, junto a la ingle.',
+  c:'Rodéalo con la cinta plana.',
+  e:'Medir a mitad de pata: sale menos y la abertura aprieta.',
+  s:'Las aberturas de las patas del calzón.'},
+ {id:'10',g:'K',n:'Tiro',fig:'side',p:['Calzón'],
+  d:'De la base de la cola, bajando por detrás y entre las patas traseras, hasta la línea de la cintura (la 4) por la barriga.',
+  c:'Cinta apoyada, siguiendo el cuerpo.',
+  e:'Tirar de la cinta entre las patas: sale menos.',
+  s:'Largo del calzón por debajo y dónde va el agujero de la cola.'},
+ {id:'11',g:'H',n:'Contorno de cara',fig:'side',p:['Hoodie'],
+  d:'Alrededor de la cabeza: por delante de las orejas, por la frente y por debajo de la mandíbula.',
+  c:'Cinta plana; apunta en notas si tiene las orejas de pie.',
+  e:'Pasar por detrás de las orejas.',
+  s:'La abertura de la capucha.'},
+ {id:'12',g:'H',n:'Alto de capucha',fig:'side',p:['Hoodie'],
+  d:'De la base del cuello por detrás, por encima de la cabeza entre las orejas, hasta la frente, encima de los ojos.',
+  c:'Cinta apoyada siguiendo la cabeza.',
+  e:'Llegar hasta el hocico.',
+  s:'El fondo de la capucha.'}
+];
+/* ---------- Dibujos ---------- */
+const DOG_SIDE = `
+ <line x1="20" y1="233" x2="380" y2="233" stroke="var(--line)" stroke-width="2"/>
+ <path d="M112,96 C92,86 84,66 96,48" fill="none" stroke="var(--dog-2)" stroke-width="9" stroke-linecap="round"/>
+ <rect x="136" y="140" width="13" height="90" rx="6" fill="var(--dog-2)"/>
+ <rect x="244" y="148" width="13" height="82" rx="6" fill="var(--dog-2)"/>
+ <path d="M262,84 C220,80 160,82 112,96 C98,104 96,140 112,158 C140,166 150,152 175,154 C205,158 230,168 252,168 C276,166 292,148 292,124 C292,112 290,104 286,98 C282,86 272,82 262,84 Z" fill="var(--dog)"/>
+ <path d="M256,90 L282,54 L320,76 L294,120 Z" fill="var(--dog)"/>
+ <path d="M112,120 C108,150 116,160 120,170 L120,228 C120,232 134,232 134,228 L134,165 C140,150 136,128 112,120 Z" fill="var(--dog)"/>
+ <rect x="258" y="150" width="14" height="80" rx="6" fill="var(--dog)"/>
+ <circle cx="304" cy="70" r="25" fill="var(--dog)"/>
+ <ellipse cx="331" cy="82" rx="17" ry="11" fill="var(--dog)"/>
+ <path d="M290,54 L296,30 L312,50 Z" fill="var(--dog-2)"/>
+ <circle cx="347" cy="79" r="3.5" fill="var(--dog-ink)"/>
+ <circle cx="312" cy="65" r="2.6" fill="var(--dog-ink)"/>`;
+const DOG_FRONT = `
+ <line x1="10" y1="233" x2="190" y2="233" stroke="var(--line)" stroke-width="2"/>
+ <path d="M62,102 C62,90 138,90 138,102 L146,168 C146,182 54,182 54,168 Z" fill="var(--dog)"/>
+ <rect x="66" y="160" width="20" height="70" rx="8" fill="var(--dog)"/>
+ <rect x="114" y="160" width="20" height="70" rx="8" fill="var(--dog)"/>
+ <circle cx="100" cy="62" r="34" fill="var(--dog)"/>
+ <path d="M72,40 L66,10 L90,32 Z" fill="var(--dog-2)"/><path d="M128,40 L134,10 L110,32 Z" fill="var(--dog-2)"/>
+ <ellipse cx="100" cy="80" rx="16" ry="12" fill="var(--dog-2)"/>
+ <circle cx="100" cy="76" r="4" fill="var(--dog-ink)"/>
+ <circle cx="86" cy="56" r="3" fill="var(--dog-ink)"/><circle cx="114" cy="56" r="3" fill="var(--dog-ink)"/>`;
+const S = 'stroke="var(--chalk)" stroke-width="3.5" fill="none" stroke-linecap="round"';
+const ring = (cx,cy,rx,ry,rot)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" ${S} stroke-dasharray="7 5" transform="rotate(${rot||0} ${cx} ${cy})"/>`;
+const dot = (x,y)=>`<circle cx="${x}" cy="${y}" r="5" fill="var(--chalk)"/>`;
+const OVER = {
+ '1': ring(280,97,25,6,36),
+ '2': ring(238,125,8,45),
+ '3': `<path d="M262,72 C226,66 160,70 112,84" ${S}/>${dot(262,72)}${dot(112,84)}`,
+ '4': ring(160,119,7,37),
+ '5': `<path d="M300,114 C306,140 294,166 266,178" ${S}/>${dot(300,114)}${dot(266,178)}`,
+ '7': ring(265,170,10,4),
+ '8': `<path d="M258,182 C226,180 196,172 172,166" ${S}/>${dot(258,182)}${dot(172,166)}`,
+ '9': ring(126,150,15,5),
+ '10': `<path d="M110,92 C92,120 100,170 140,168 C152,166 162,160 166,158" ${S}/>${dot(110,92)}${dot(166,158)}`,
+ '11': ring(318,72,7,24,-12),
+ '12': `<path d="M266,78 C276,44 300,32 322,50" ${S}/>${dot(266,78)}${dot(322,50)}`
+};
+const svgSide = (id)=>`<svg viewBox="0 0 400 245" role="img" aria-label="Perro de perfil con la medida ${id} marcada">${DOG_SIDE}${OVER[id]||''}</svg>`;
+const svgFront = ()=>`<svg viewBox="0 0 200 245" role="img" aria-label="Perro de frente con la separación entre patas delanteras marcada">${DOG_FRONT}<line x1="88" y1="166" x2="112" y2="166" ${S}/>${dot(88,166)}${dot(112,166)}</svg>`;
+const svgPaw = (id)=>`<svg viewBox="0 0 200 200" role="img" aria-label="Huella de la pata sobre un folio"><rect x="30" y="14" width="140" height="176" rx="4" fill="var(--paper-2)" stroke="var(--line)" stroke-width="2"/>
+ <ellipse cx="100" cy="122" rx="30" ry="26" fill="none" stroke="var(--dog-ink)" stroke-width="2.5"/>
+ <ellipse cx="68" cy="82" rx="11" ry="14" fill="none" stroke="var(--dog-ink)" stroke-width="2.5"/><ellipse cx="88" cy="66" rx="11" ry="14" fill="none" stroke="var(--dog-ink)" stroke-width="2.5"/>
+ <ellipse cx="112" cy="66" rx="11" ry="14" fill="none" stroke="var(--dog-ink)" stroke-width="2.5"/><ellipse cx="132" cy="82" rx="11" ry="14" fill="none" stroke="var(--dog-ink)" stroke-width="2.5"/>
+ ${id==='C7'?`<line x1="160" y1="52" x2="160" y2="148" ${S}/>${dot(160,52)}${dot(160,148)}`:`<line x1="54" y1="164" x2="146" y2="164" ${S}/>${dot(54,164)}${dot(146,164)}`}</svg>`;
+const figFor = m => m.fig==='front'?svgFront():m.fig==='paw'?svgPaw(m.id):svgSide(m.id);
+
+const landmarks=()=>`<svg viewBox="0 0 400 245" role="img" aria-label="Perro de perfil con los cinco puntos de referencia">${DOG_SIDE}
+ ${[[262,80,1],[240,80,2],[112,96,3],[252,160,4],[140,156,5]].map(([x,y,n])=>`<circle cx="${x}" cy="${y}" r="10" fill="var(--chalk)"/><text x="${x}" y="${y+4.5}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--paper-2)">${n}</text>`).join('')}</svg>`;
+return {MH,figFor,landmarks};
+})();
 /* ---------- Página única: perro + prenda + medidas + lámina ---------- */
 (function(){
 const $=id=>document.getElementById(id);
@@ -550,12 +714,16 @@ function renderMeas(){
   $('measTitle').textContent=`Medidas de ${dogName()} para ${GARMENTS[garment].name.toLowerCase()}`;
   $('meas').innerHTML=GARMENTS[garment].needs.map(k=>`<div class="m"><label for="m${k}"><span class="note">${k}.</span> ${SHORT[k]}</label>
     <input class="num" id="m${k}" data-k="${k}" inputmode="decimal" value="${values[k]!=null?String(values[k]).replace('.',','):''}" placeholder="cm">
-    <button type="button" class="q" data-q="${k}" aria-label="Dónde se mide: ${SHORT[k]}">?</button><div class="help" id="h${k}" hidden>${HELP[k]}</div></div>`).join('');
+    <button type="button" class="q" data-q="${k}" aria-expanded="false" aria-controls="h${k}">cómo</button><div class="help" id="h${k}" hidden>${helpHtml(k)}</div></div>`).join('');
 }
+function helpHtml(k){ const r=HELPREF.MH.find(x=>x.id===k); if(!r) return esc(HELP[k]);
+  return `${HELPREF.figFor(r)}<dl><dt>Dónde</dt><dd>${esc(r.d)}</dd><dt>Cómo</dt><dd>${esc(r.c)}</dd><div class="err"><dt>Ojo</dt><dd>${esc(r.e)}</dd></div></dl>`; }
 let tmr=null;
 $('meas').addEventListener('input',e=>{ const k=e.target.dataset.k; if(!k) return; const n=num(e.target.value); if(n==null) delete values[k]; else values[k]=n;
   ui.draft=ui.draft||{}; ui.draft[dogName()]={...values}; saveUI(); $('status').textContent=''; clearTimeout(tmr); tmr=setTimeout(redraw,350); });
-$('meas').addEventListener('click',e=>{ const b=e.target.closest('[data-q]'); if(!b) return; const h=$('h'+b.dataset.q); h.hidden=!h.hidden; });
+$('meas').addEventListener('click',e=>{ const b=e.target.closest('[data-q]'); if(!b) return; const h=$('h'+b.dataset.q); h.hidden=!h.hidden; h.parentElement.classList.toggle('open',!h.hidden); b.setAttribute('aria-expanded',String(!h.hidden)); });
+$('allHelp').addEventListener('click',()=>{ const hs=[...document.querySelectorAll('#meas .help')]; const open=hs.some(h=>h.hidden); hs.forEach(h=>{ h.hidden=!open; h.parentElement.classList.toggle('open',open); }); document.querySelectorAll('#meas .q').forEach(b=>b.setAttribute('aria-expanded',String(open))); $('allHelp').textContent=open?'Ocultar todas':'Ver todas'; });
+$('lmk').innerHTML=HELPREF.landmarks();
 
 /* guardar: mismo formato que la página de medidas, y se envía a la hoja de Dani */
 function today(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
