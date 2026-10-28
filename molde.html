@@ -4,293 +4,145 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>Del cuerpo al molde</title>
+<title>Moldes de los perros</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&family=Young+Serif&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;600&family=Young+Serif&display=swap">
 <style>
-/* Misma hoja de taller que la página de medidas: papel cuadriculado, cinta métrica, tiza azul para lo nuevo */
 :root{
   --paper:#F4F6F3; --paper-2:#FFFFFF; --grid:#E3E9E4; --grid-strong:#C9D3CB;
   --ink:#1E2940; --ink-soft:#56607A; --line:#C9D1CB;
-  --tape:#F2C335; --tape-ink:#2B2410;
-  --chalk:#2F63D0; --chalk-soft:#DCE6FA; --piece:rgba(242,195,53,.16);
+  --tape:#F2C335; --tape-ink:#2B2410; --chalk:#2F63D0; --chalk-soft:#DCE6FA; --piece:rgba(242,195,53,.16);
   --ok:#2E7D4F; --warn:#B4530F; --warn-bg:#FCEBD9;
-  --f-display:"Young Serif", Georgia, "Times New Roman", serif;
-  --f-body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-display:"Young Serif", Georgia, serif; --f-body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#151A22; --paper-2:#1D232E; --grid:#222936; --grid-strong:#2F3846;
-  --ink:#E8ECF3; --ink-soft:#A3ACBD; --line:#343C4A;
-  --tape:#E9B92C; --tape-ink:#211B08;
-  --chalk:#7FA6F5; --chalk-soft:#22314F; --piece:rgba(233,185,44,.12);
-  --ok:#6CC594; --warn:#F0A060; --warn-bg:#3A2716; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#151A22; --paper-2:#1D232E; --grid:#222936; --grid-strong:#2F3846;
-  --ink:#E8ECF3; --ink-soft:#A3ACBD; --line:#343C4A;
-  --tape:#E9B92C; --tape-ink:#211B08;
-  --chalk:#7FA6F5; --chalk-soft:#22314F; --piece:rgba(233,185,44,.12);
-  --ok:#6CC594; --warn:#F0A060; --warn-bg:#3A2716; color-scheme:dark}
-*{box-sizing:border-box}
-[hidden]{display:none!important}
+  --paper:#151A22; --paper-2:#1D232E; --grid:#222936; --grid-strong:#2F3846; --ink:#E8ECF3; --ink-soft:#A3ACBD; --line:#343C4A;
+  --tape:#E9B92C; --tape-ink:#211B08; --chalk:#7FA6F5; --chalk-soft:#22314F; --ok:#6CC594; --warn:#F0A060; --warn-bg:#3A2716; color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#151A22; --paper-2:#1D232E; --grid:#222936; --grid-strong:#2F3846; --ink:#E8ECF3; --ink-soft:#A3ACBD; --line:#343C4A;
+  --tape:#E9B92C; --tape-ink:#211B08; --chalk:#7FA6F5; --chalk-soft:#22314F; --ok:#6CC594; --warn:#F0A060; --warn-bg:#3A2716; color-scheme:dark}
+*{box-sizing:border-box} [hidden]{display:none!important}
 html,body{margin:0}
-body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;
-  background-image:radial-gradient(var(--grid-strong) 1px, transparent 1.2px);background-size:22px 22px}
-.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0 64px}
-.narrow{max-width:760px}
-.tape{height:34px;background:
-  repeating-linear-gradient(90deg,var(--tape-ink) 0 1px,transparent 1px 10px) bottom/100% 9px no-repeat,
-  repeating-linear-gradient(90deg,var(--tape-ink) 0 1.5px,transparent 1.5px 50px) bottom/100% 16px no-repeat,
-  var(--tape);border-bottom:1px solid var(--tape-ink)}
-header{padding-block:28px 8px}
-.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
-.eyebrow a{color:inherit}
-h1{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,7vw,50px);line-height:1.05;margin:.2em 0 .3em;text-wrap:balance}
-h2{font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1.15;margin:0 0 .4em;text-wrap:balance}
-h3{font-size:19px;margin:0 0 .3em;line-height:1.25}
-p{margin:0 0 .8em;max-width:68ch}
-.lead{font-size:19px}
-section{padding-block:28px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:14px}
-a{color:var(--chalk)}
-.code{font-family:var(--f-mono);font-weight:600;font-size:.82em;background:var(--tape);color:var(--tape-ink);padding:1px 6px;border-radius:4px;white-space:nowrap}
-b.num{font-family:var(--f-mono);font-weight:600;background:var(--chalk-soft);color:var(--ink);padding:0 5px;border-radius:4px;white-space:nowrap}
-b.seg{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
-.steps0{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;counter-reset:s}
-.steps0 li{counter-increment:s;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.steps0 li::before{content:counter(s);font-family:var(--f-mono);font-weight:600;background:var(--ink);color:var(--paper);border-radius:50%;width:28px;height:28px;display:grid;place-items:center;font-size:14px;margin-bottom:8px}
-.why{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-.why ul{margin:.3em 0 0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
-
-/* controles */
-.ctrl{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
-label.f{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--ink-soft);max-width:420px}
-select,input{font:inherit;font-size:17px;color:var(--ink);background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:9px 10px;width:100%;min-width:0}
-input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--chalk);outline-offset:1px}
-details.box{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
-details.box summary{cursor:pointer;font-weight:700}
-.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px 14px;margin-top:12px}
-label.mf{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--ink-soft);min-width:0}
-label.mf input{font-family:var(--f-mono);font-size:16px}
-label.mf input[readonly]{background:transparent;border-style:dashed}
-label.mf small{font-size:12.5px;line-height:1.35}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.5}
+.tape{height:26px;background:repeating-linear-gradient(90deg,var(--tape-ink) 0 1px,transparent 1px 10px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--tape-ink) 0 1.5px,transparent 1.5px 50px) bottom/100% 13px no-repeat,var(--tape)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px)) 48px}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(26px,5vw,38px);line-height:1.1;margin:18px 0 4px}
+.sub{color:var(--ink-soft);margin:0 0 14px;font-size:15px}
+.card{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.card h2{font-size:17px;margin:0 0 10px;display:flex;gap:8px;align-items:center}
+.card h2 .n{font-family:var(--f-mono);background:var(--ink);color:var(--paper-2);border-radius:50%;width:24px;height:24px;display:inline-grid;place-items:center;font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font:inherit;font-size:16px;font-weight:700;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+.row2{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;align-items:center}
+@media (max-width:600px){.row2{grid-template-columns:1fr}}
+.lbl{font-size:14px;color:var(--ink-soft)}
+input{font:inherit;color:var(--ink);background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+input:focus-visible,button:focus-visible{outline:3px solid var(--chalk);outline-offset:1px}
+.meas{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px 12px}
+.m{display:grid;grid-template-columns:1fr 84px 30px;gap:6px;align-items:center;border-bottom:1px solid var(--line);padding:4px 0}
+.m label{font-size:15px;line-height:1.25}
+.m .num{font-family:var(--f-mono);font-size:17px;text-align:center;width:84px}
+.m .q{font:inherit;font-weight:700;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink-soft);cursor:pointer;padding:0}
+.m .help{grid-column:1/-1;font-size:13.5px;color:var(--ink-soft);background:var(--paper);border-radius:6px;padding:5px 8px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+button.b{font:inherit;font-weight:700;font-size:15px;border-radius:8px;padding:9px 14px;border:1px solid var(--ink);background:var(--ink);color:var(--paper-2);cursor:pointer}
+button.b.ghost{background:transparent;color:var(--ink)}
+.status{font-size:14px} .status.ok{color:var(--ok)} .status.bad{color:var(--warn)}
 .note{font-size:14px;color:var(--ink-soft)}
-.banner{background:var(--warn-bg);border-radius:8px;padding:10px 12px;font-size:15px}
-.tabs{display:flex;flex-wrap:wrap;gap:6px}
-.tabs button{font:inherit;font-size:16px;font-weight:700;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper-2);color:var(--ink);cursor:pointer}
-.tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.tabs.small button{font-size:14px;padding:6px 12px}
+a{color:var(--chalk)}
+.warn{background:var(--warn-bg);border-radius:8px;padding:8px 12px;font-size:15px;margin-bottom:10px}
+details.adj{font-size:15px} details.adj summary{cursor:pointer;color:var(--ink-soft)}
+.easeg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:8px}
+.easeg label{display:flex;flex-direction:column;font-size:13.5px;color:var(--ink-soft);gap:3px}
 
-/* mesa de trazado */
-.bench{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;align-items:start}
-@media (max-width:860px){.bench{grid-template-columns:minmax(0,1fr)}}
-.stagebox{position:sticky;top:10px;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:10px}
-@media (max-width:860px){.stagebox{position:static}}
-#stage figure{margin:0}
-#stage figcaption{font-size:14px;color:var(--ink-soft);margin:2px 4px 6px}
-svg.draft{width:100%;height:auto;max-height:68vh;display:block;background:var(--paper-2)}
-.allp{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
-.nav .count{font-family:var(--f-mono);font-size:14px;color:var(--ink-soft);margin-right:auto}
-button{font:inherit;font-weight:700;font-size:15px;border-radius:8px;padding:9px 14px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer}
-button.ghost{background:transparent;color:var(--ink)}
-button[disabled]{opacity:.4;cursor:not-allowed}
-.chk{display:flex;gap:8px;align-items:center;font-size:15px}
-.chk input{width:auto}
-ol.st{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;counter-reset:st}
-ol.st li{counter-increment:st}
-ol.st .sbtn{all:unset;box-sizing:border-box;display:grid;grid-template-columns:30px 1fr;gap:10px;width:100%;cursor:pointer;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper-2);color:var(--ink);font-size:16px;line-height:1.5}
-ol.st .sbtn::before{content:counter(st);font-family:var(--f-mono);font-weight:600;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:13px;border:1.5px solid var(--ink-soft);color:var(--ink-soft)}
-ol.st li.done .sbtn{opacity:.62}
-ol.st li.on .sbtn{border-color:var(--chalk);box-shadow:0 0 0 2px var(--chalk-soft)}
-ol.st li.on .sbtn::before{background:var(--chalk);border-color:var(--chalk);color:var(--paper-2)}
-ol.st .sbtn:focus-visible{outline:3px solid var(--chalk)}
-ol.st li.pnotes{font-size:14px;color:var(--ink-soft);padding:6px 4px}
-.cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
-ul.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-ul.checks li{display:grid;grid-template-columns:22px 1fr auto;gap:8px;align-items:baseline;font-size:15px;background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
-ul.checks .ck{font-weight:700} ul.checks li.ok .ck{color:var(--ok)} ul.checks li.bad .ck{color:var(--warn)}
-ul.checks .v{font-family:var(--f-mono);font-size:13.5px;white-space:nowrap}
-.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--paper-2)}
-table{border-collapse:collapse;width:100%}
-td,th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:15px}
-td.v{font-family:var(--f-mono);white-space:nowrap}
-thead th{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);border-bottom:2px solid var(--ink)}
-.legendrow{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;color:var(--ink-soft)}
-.legendrow span{display:inline-flex;align-items:center;gap:6px}
-.legendrow i{display:inline-block;width:26px;height:0;border-top:2px solid var(--ink)}
-.legendrow i.fold{border-top:2px dashed var(--ink)} .legendrow i.sa{border-top:1.5px dashed var(--ink-soft)} .legendrow i.new{border-top:3px solid var(--chalk)}
+/* ---- Lámina: siempre en papel claro, como la ficha impresa ---- */
+.lamwrap{overflow:hidden;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:zoom-in}
+.lam{width:1200px;transform-origin:0 0;background:#fbfaf7;color:#1d1d1f;font-family:Georgia,"Times New Roman",serif;padding:22px 26px 20px}
+.lam *{font-family:inherit}
+.lam .sans,.lam table,.lam ol,.lam ul{font-family:"Helvetica Neue",Arial,sans-serif}
+.lam-h{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #1d1d1f;padding-bottom:8px;margin-bottom:12px}
+.lam-h h3{font-size:30px;font-weight:400;letter-spacing:.02em;margin:0;text-transform:uppercase}
+.lam-h .for{font-size:15px;letter-spacing:.25em;text-transform:uppercase;margin-top:2px}
+.lam-h .meta{font-size:12.5px;text-align:right;color:#555;font-family:Arial,sans-serif}
+.lam-g{display:grid;grid-template-columns:690px 1fr;gap:22px}
+.lam h4{font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;font-family:Arial,sans-serif;font-weight:700}
+.lam .pcs{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:flex-start}
+.lam .pc{display:flex;flex-direction:column;align-items:flex-start}
+.lam .pc .t{font-family:Arial,sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.lam .pc .t small{font-weight:400;text-transform:none;letter-spacing:0;color:#555}
+.lam .pc svg{display:block;height:auto}
+.lam .box{border:1px solid #cfcac0;border-radius:6px;padding:9px 11px;margin-bottom:10px;background:#fff}
+.lam .steps{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin-top:12px}
+.lam .steps.one{grid-template-columns:1fr}
+.lam ol{margin:0 0 4px;padding-left:20px;font-size:13px;line-height:1.38}
+.lam ol li{margin-bottom:2px}
+.lam table{border-collapse:collapse;width:100%;font-size:12.5px}
+.lam td{padding:2.5px 4px;border-bottom:1px solid #e6e1d8;vertical-align:top}
+.lam td.v{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.lam td.p{font-weight:700;width:22px}
+.lam .pname{font-family:Arial,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;color:#555;margin:6px 0 2px}
+.lam ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.38}
+.lam .sym{display:grid;grid-template-columns:34px 1fr;gap:3px 8px;font-family:Arial,sans-serif;font-size:12px;align-items:center}
+.lam .sym i{display:block;border-top:2px solid #1d1d1f}
+.lam .sym i.f{border-top:2px dashed #1d1d1f} .lam .sym i.c{border-top:1.4px dashed #777} .lam .sym i.a{border-top:1px dashed #999}
+.lam b.num{font-weight:700}
 #printArea{display:none}
-small.src{display:block;font-size:13.5px;line-height:1.4;color:var(--ink-soft);margin-top:3px}
-.fhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:10px}
-.fhead h2{margin:.1em 0}
-.flegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-soft)}
-.flegend span{display:inline-flex;align-items:center;gap:6px}
-.flegend i{display:inline-block;width:24px;border-top:2px solid var(--ink)}
-.flegend i.fold{border-top:2px dashed var(--ink)} .flegend i.sa{border-top:1.5px dashed var(--ink-soft)} .flegend i.g{border-top:1px dashed var(--ink-soft)}
-.fpiece{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;break-inside:avoid}
-@media (max-width:760px){.fpiece{grid-template-columns:minmax(0,1fr)}}
-.fpiece h3 small{font-weight:400;color:var(--ink-soft);font-size:14px}
-.fpiece svg.draft{max-height:560px}
-.ftext h4,.fbox h4{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:4px 0 8px;font-family:var(--f-mono)}
-ol.fsteps{margin:0 0 14px;padding-left:1.4em;display:flex;flex-direction:column;gap:8px}
-ol.fsteps li{padding-left:4px}
-table.pts{border-collapse:collapse;width:100%;font-size:14px}
-table.pts td,table.pts th{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-table.pts td.v{font-family:var(--f-mono);white-space:nowrap;text-align:right}
-table.pts th{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
-.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.fbox{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-.fbox ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
-#ficha{gap:16px}
-.now{font-size:16px;line-height:1.5;background:var(--chalk-soft);border-radius:8px;padding:10px 12px;margin-top:8px}
-@media (min-width:861px){.now{display:none}}
 @media print{
   @page{size:A4 portrait;margin:10mm}
-  html,body{background:#fff!important;color:#000}
-  body.printing-sheets .wrap, body.printing-sheets .tape, body.printing-steps .wrap, body.printing-steps .tape{display:none!important}
-  body.printing-sheets #printArea, body.printing-steps #printArea{display:block!important}
+  html,body{background:#fff!important}
+  body.printing-sheets .wrap,body.printing-sheets .tape{display:none!important}
+  body.printing-sheets #printArea{display:block!important}
   .sheet{page-break-after:always;break-after:page;padding:0;margin:0;border:0;display:block}
+  .sheet:last-child{page-break-after:auto}
   .sheet svg{display:block}
-  .sheet:last-child{page-break-after:auto;break-after:auto}
-  :root:root:root{--paper:#fff;--paper-2:#fff;--grid:#eee;--grid-strong:#ddd;--ink:#000;--ink-soft:#555;--line:#ccc;--chalk:#000;--chalk-soft:#eee;--piece:transparent}
   .sheet-h{font:11px/1.3 sans-serif;margin-bottom:2mm;color:#333}
-  .stepsheet{color:#000;font:11pt/1.45 sans-serif}
-  .fichaprint{color:#000;font:10.5pt/1.4 sans-serif}
-  .fichaprint .fpiece{display:block;border:1px solid #999;margin-bottom:6mm;overflow:visible;break-inside:auto;page-break-inside:auto}
-  .fichaprint .fpiece::after{content:"";display:block;clear:both}
-  .fichaprint .fdraw{float:left;width:75mm;margin-right:6mm}
-  .fichaprint .fdraw{break-inside:avoid}
-  .fichaprint svg.draft{max-height:125mm}
-  .fichaprint .fgrid{grid-template-columns:1fr 1fr}
-  .fichaprint .fbox{break-inside:avoid}
-  .fichaprint b.num{background:none;border:1px solid #999}
-  .stepsheet h3{margin-top:8mm;break-after:avoid}
-  .stepsheet .ss{display:grid;grid-template-columns:70mm 1fr;gap:6mm;break-inside:avoid}
-  .stepsheet svg{width:auto;height:auto;max-width:70mm;max-height:120mm}
-  .stepsheet b.num{background:none;border:1px solid #999}
 }
-@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="tape" aria-hidden="true"></div>
 <div class="wrap">
-<header class="narrow">
-  <div class="eyebrow">Plan B · Producto propio · <a href="./">Medidas</a> → Molde</div>
-  <h1>Del cuerpo al molde</h1>
-  <p class="lead">La ficha técnica de cada prenda con los centímetros de cada perro: el molde dibujado con sus medidas, el paso a paso («desde A baja tanto y escuadra tanto») y la tabla de puntos. Eliges perro y prenda y sale sola.</p>
-</header>
+  <h1>Moldes de los perros</h1>
+  <p class="sub">Elige perro y prenda, escribe sus medidas y sale el molde con los centímetros.</p>
 
-<section id="como" class="narrow" style="max-width:none">
-  <h2>Cómo se usa</h2>
-  <ol class="steps0">
-    <li><b>Mide primero</b> en la <a href="./">página de medidas</a>. Lo que guardes allí aparece aquí solo, si usas el mismo móvil o la misma compu.</li>
-    <li><b>Elige perro y prenda.</b> Cada prenda tiene sus piezas (espalda, barriga…) y cada pieza, su lista de pasos.</li>
-    <li><b>Traza en papel</b> con la ficha: cada pieza tiene su dibujo con las medidas, el paso a paso y la tabla de puntos («desde A baja tanto y escuadra tanto»). O imprime el molde a tamaño real.</li>
-    <li><b>Prueba en tela barata.</b> Si algo tira o sobra, no corrijas el papel a mano: cambia la holgura de esa zona aquí abajo y vuelve a sacarlo. Así el arreglo vale para los cuatro perros.</li>
-  </ol>
-</section>
-
-<section id="elegir">
-  <h2>Perro y prenda</h2>
-  <div class="ctrl">
-    <label class="f" for="src">Medidas de
-      <select id="src"></select>
-    </label>
-    <p class="banner" id="noDogs" hidden>En este aparato todavía no hay medidas guardadas. Mientras tanto puedes mirar el perro de ejemplo o escribir medidas a mano.</p>
-    <details class="box" id="measBox">
-      <summary>Ver las medidas que se usan</summary>
-      <p class="note" id="measNote" style="margin-top:8px"></p>
-      <div class="mgrid" id="measGrid"></div>
-    </details>
-    <div class="tabs" id="garTabs" role="tablist" aria-label="Prenda"></div>
-    <p class="banner" id="missing" hidden></p>
-  </div>
-</section>
-
-<div id="work">
-<section id="ficha">
-  <p class="banner" id="warn" hidden></p>
-  <div id="fichaBody"></div>
-  <div class="nav">
-    <button type="button" id="printFicha">Imprimir esta ficha</button>
-    <button type="button" class="ghost" id="printReal2">Imprimir el molde a tamaño real</button>
-  </div>
-</section>
-<section id="trazado">
-  <h2>Trazar con ayuda, paso a paso</h2>
-  <p class="note">Lo mismo que la ficha, pero de uno en uno: cada «Siguiente» marca en azul lo que se traza en ese paso.</p>
-  <div class="tabs small" id="pieceTabs" role="tablist" aria-label="Pieza"></div>
-  <div class="bench">
-    <div class="stagebox">
-      <div id="stage"></div>
-      <div id="nowStep" class="now" aria-live="polite"></div>
-      <div class="nav" id="stepNav">
-        <span class="count" id="stepCount"></span>
-        <button type="button" class="ghost" id="prev" aria-label="Paso anterior">← Anterior</button>
-        <button type="button" id="next" aria-label="Paso siguiente">Siguiente →</button>
-        <button type="button" class="ghost" id="last">Ver terminado</button>
-      </div>
-      <div class="legendrow" style="margin-top:8px">
-        <span><i class="new"></i>lo de este paso</span><span><i></i>contorno</span><span><i class="fold"></i>doblez de la tela</span><span><i class="sa"></i>línea de corte</span>
-      </div>
-      <label class="chk" style="margin-top:8px"><input type="checkbox" id="showSA" checked> Dibujar el margen de costura (línea de corte)</label>
+  <div class="card">
+    <h2><span class="n">1</span> Perro y prenda</h2>
+    <div class="row2">
+      <span class="lbl">Perro</span>
+      <div class="chips" id="dogs"></div>
+      <span class="lbl">Prenda</span>
+      <div class="chips" id="garments"></div>
     </div>
-    <ol class="st" id="steps"></ol>
+    <input id="otherName" placeholder="Nombre del perro" hidden style="margin-top:8px">
   </div>
-</section>
 
-<section id="imprimir">
-  <h2>Imprimir</h2>
-  <p>A tamaño real sale en varias hojas A4 que se pegan con celo: cada hoja dice su sitio (A1, A2…). Antes de cortar, mide el cuadrado de prueba de la primera hoja: tiene que dar <b>10 × 10 cm</b>. Si no, imprime otra vez eligiendo «tamaño real» o «escala 100 %», nunca «ajustar a la página».</p>
-  <div class="nav">
-    <button type="button" id="printReal">Imprimir el molde a tamaño real</button>
-    <button type="button" class="ghost" id="printSteps">Imprimir la ficha</button>
-  </div>
-</section>
-
-<section id="comprobar">
-  <div class="cols2">
-    <div>
-      <h2>Comprobaciones</h2>
-      <p class="note">Lo que se cose junto tiene que medir lo mismo, y las aberturas tienen que dar la medida del perro más su holgura. Si algo sale en naranja, avisa.</p>
-      <ul class="checks" id="checks"></ul>
-    </div>
-    <div>
-      <h2>Qué cortar</h2>
-      <div class="tablewrap"><table><thead><tr><th>Pieza</th><th>Tela</th><th>Cuántas</th></tr></thead><tbody id="cutList"></tbody></table></div>
-      <p class="note" style="margin-top:8px">El molde va <b>sin</b> margen de costura; la línea discontinua es por donde se corta (1 cm en polar y moletón, 0,7 cm en jersey). Al doblez no se le añade nada.</p>
+  <div class="card">
+    <h2><span class="n">2</span> <span id="measTitle">Medidas</span></h2>
+    <p class="note" style="margin:0 0 8px">En centímetros, con la cinta apoyada y sin apretar. Toca <b>?</b> para ver dónde se mide.</p>
+    <div class="meas" id="meas"></div>
+    <div class="actions">
+      <button type="button" class="b" id="save">Guardar medidas</button>
+      <span class="status" id="status" role="status"></span>
     </div>
   </div>
-</section>
 
-<section id="holguras">
-  <h2>Holguras y diseño</h2>
-  <p>Las medidas son del cuerpo, sin holgura. La holgura la pone el molde según la prenda y la tela: un abrigo de polar va más suelto que un calzón de jersey, que se pega al cuerpo. Estos son los valores de partida; la prueba en tela dirá cuáles tocar.</p>
-  <details class="box" open>
-    <summary>Holguras de esta prenda (cm)</summary>
-    <div class="mgrid" id="easeGrid"></div>
-    <p class="note" id="easeSrc" style="margin-top:10px"></p>
-    <button type="button" class="ghost" id="easeReset">Volver a los valores de partida</button>
+  <div class="card">
+    <h2><span class="n">3</span> El molde</h2>
+    <div class="warn" id="warn" hidden></div>
+    <div id="lamOut"></div>
+    <div class="actions">
+      <button type="button" class="b" id="png">Descargar imagen</button>
+      <button type="button" class="b ghost" id="real">Imprimir a tamaño real</button>
+      <span class="status" id="pngStatus"></span>
+    </div>
+    <p class="note" style="margin:8px 0 0">A tamaño real sale en varias hojas A4 para unir con celo. Antes de cortar, mide el cuadrado de prueba: tiene que dar 10 × 10 cm.</p>
+  </div>
+
+  <details class="adj card">
+    <summary>Ajustes de holgura (solo si la prueba en tela queda justa o suelta)</summary>
+    <div class="easeg" id="ease"></div>
+    <div class="actions"><button type="button" class="b ghost" id="easeReset">Volver a los valores de partida</button></div>
   </details>
-</section>
-
-<section id="por-que" class="narrow" style="max-width:none">
-  <h2>Por qué el molde tiene esta forma</h2>
-  <div class="why">
-    <p>Es el mismo razonamiento que el cuerpo base de persona, girado: el perro va «a cuatro patas».</p>
-    <ul>
-      <li><b>La espalda del perro es la espalda; la barriga es el delantero.</b> Por eso hay dos piezas, las dos al doblez: el doblez de la espalda es la columna y el de la barriga, el esternón.</li>
-      <li><b>La pata delantera es el brazo, pero sale por debajo.</b> La costura que va del lado del cuello hasta la pata hace de costura de hombro, y la sisa queda entre la espalda y la barriga, igual que en una blusa.</li>
-      <li><b>La barriga es estrecha entre las patas</b> (lo que mide la separación, la medida 6) y se ensancha hacia el cuello, como un babero. La espalda se lleva el resto del contorno de pecho.</li>
-      <li><b>El collar va inclinado:</b> la garganta queda más adelante que la nuca. Por eso el escote de la barriga baja y el de la espalda sube.</li>
-      <li><b>Las costuras que se unen se trazan para medir lo mismo</b> (hombro con hombro, costado con costado) y la página lo comprueba. Si la prueba en tela pide cambios, se cambian las holguras y todo se recalcula.</li>
-      <li>El calzón es una sola pieza al doblez por el centro: sube por el lomo, rodea la cola, pasa entre las patas y llega a la barriga. El tiro (medida 10) es justo ese recorrido.</li>
-    </ul>
-  </div>
-  <p class="note">De dónde sale: no hay un método publicado y completo de trazado por puntos para estas tres prendas en perro pequeño. Este se ha montado juntando lo que sí está publicado: el patrón base ruso de PatternEasy (la barriga sale de la distancia entre patas delanteras y la espalda cubre el resto del pecho), el de Aury Moda Pet (la espalda se lleva unos 2/3 del escote), el abrigo de BERNINA y las holguras de milla milla, Celebdog y Clover. Lo que es propio (inclinación del collar, alto de sisa en la barriga, inclinación del hombro) son valores de partida: la prueba en tela de Catica, Max, Ais y Milo dirá si se quedan. Versión 1 · 27-oct-2026.</p>
-</section>
-</div>
 </div>
 <div id="printArea"></div>
 <script>
@@ -466,7 +318,9 @@ const Cap=t=>t.charAt(0).toUpperCase()+t.slice(1);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 
 /* Paso con texto corto (lo que se hace) y, aparte, de dónde sale el número (en palabras). */
-Piece.prototype.st=function(t,w){ this.steps.push({html:t,why:w||''}); this.k=this.steps.length-1; return this; };
+const f=n=>fmt1(n);
+const pp=(n,down,right)=>`<b>${n}</b>: ${down<-0.05?'sube '+f(-down):down>0.05?'baja '+f(down):''}${Math.abs(down)>0.05&&Math.abs(right)>0.05?' · ':''}${Math.abs(right)>0.05?'derecha '+f(right):''}.`;
+Piece.prototype.st=function(t,w,b){ this.steps.push({html:t,why:w||'',brief:b||t}); this.k=this.steps.length-1; return this; };
 /* Punto a escuadra desde el origen de la pieza: «desde A baja X y escuadra Y». Deja guías y cotas en el dibujo
    y una fila en la tabla de puntos. */
 Piece.prototype.pos=function(name,down,right,what,lab){
@@ -498,24 +352,24 @@ function baseBlock(M,E,opt){
 
   /* ---- BARRIGA ---- */
   const bel=new Piece('barriga','Barriga','Cortar 1 al doblez',{mat:opt.mat}); bel.origin=[0,0];
-  bel.st(`Traza una línea vertical: es el <b>doblez</b> de la tela (el centro de la barriga). Arriba marca el punto <b>a</b>, la garganta.`,'Todos los puntos de esta pieza se miden desde a: bajando por el doblez y escuadrando hacia la derecha.');
+  bel.st(`Traza una línea vertical: es el <b>doblez</b> de la tela (el centro de la barriga). Arriba marca el punto <b>a</b>, la garganta.`,'Todos los puntos de esta pieza se miden desde a: bajando por el doblez y escuadrando hacia la derecha.',`Vertical = doblez. Arriba, <b>a</b> (garganta).`);
   const a=bel.pos('a',0,0,'garganta (origen)','nw');
-  bel.st(`${Cap(desde('a',yEnd,0))}: punto <b>e₀</b>.`,`Largo de pecho delantero (${fmt1(M[5])}) + largo de barriga (${fmt1(M[8])})${short?` − ${fmt1(short)} de la pretina, para que en los machos no tape el pene`:''}.`);
+  bel.st(`${Cap(desde('a',yEnd,0))}: punto <b>e₀</b>.`,`Largo de pecho delantero (${fmt1(M[5])}) + largo de barriga (${fmt1(M[8])})${short?` − ${fmt1(short)} de la pretina, para que en los machos no tape el pene`:''}.`,`Desde a baja ${f(yEnd)} → <b>e₀</b>.`);
   const e0=bel.pos('e₀',yEnd,0,'final de la barriga','w'); bel.guide(a,e0,{dash:true});
-  bel.st(`Punto <b>b</b>: ${desde('a',tilt,nf)}. Une ${X('a','b')} con una curva que salga recta del doblez: es el escote.`,`La barriga se lleva el 40 % del escote y la espalda el 60 %. Baja ${fmt1(tilt)} porque el collar va inclinado: la garganta queda más adelante que la nuca.`);
+  bel.st(`Punto <b>b</b>: ${desde('a',tilt,nf)}. Une ${X('a','b')} con una curva que salga recta del doblez: es el escote.`,`La barriga se lleva el 40 % del escote y la espalda el 60 %. Baja ${fmt1(tilt)} porque el collar va inclinado: la garganta queda más adelante que la nuca.`,`${pp('b',tilt,nf)} Curva a–b (escote).`);
   const b=bel.pos('b',tilt,nf,'lado del cuello','ne');
   const neckF=neckF_(nf); bel.gcurve(neckF);
-  bel.st(`Punto <b>c</b>: ${desde('a',M[5]-1,wbTop)}. Une ${X('b','c')} en recta: es la costura de hombro.`,`c es donde empieza la pata: largo de pecho delantero − 1. El ancho es la mitad de la separación de patas + 0,75.`);
+  bel.st(`Punto <b>c</b>: ${desde('a',M[5]-1,wbTop)}. Une ${X('b','c')} en recta: es la costura de hombro.`,`c es donde empieza la pata: largo de pecho delantero − 1. El ancho es la mitad de la separación de patas + 0,75.`,`${pp('c',M[5]-1,wbTop)} Recta b–c (hombro).`);
   const cc=bel.pos('c',M[5]-1,wbTop,'arriba de la sisa','e'); const shF=stroke(b,[{t:'L',p:cc}]); bel.guide(b,cc);
   const dB=0.6;
-  bel.st(`Punto <b>d</b>: ${desde('a',M[5]-1+hBelly,wb)}. Une ${X('c','d')} con una curva que entre ${c(dB)} en el centro: es media sisa.`,`d es la axila; el ancho es la mitad de la separación de patas + 2.`);
+  bel.st(`Punto <b>d</b>: ${desde('a',M[5]-1+hBelly,wb)}. Une ${X('c','d')} con una curva que entre ${c(dB)} en el centro: es media sisa.`,`d es la axila; el ancho es la mitad de la separación de patas + 2.`,`${pp('d',M[5]-1+hBelly,wb)} Curva c–d hacia dentro ${f(dB)} (sisa).`);
   const d=bel.pos('d',M[5]-1+hBelly,wb,'axila','e');
   const inn=G.add(G.lerp(cc,d,0.5),G.mul(G.norm(G.perp(G.sub(d,cc))),dB));
   const armF=stroke(cc,[curve(cc,inn,[-0.2,1],G.sub(d,cc),0.3),curve(inn,d,G.sub(d,cc),[0.25,1],0.3)]); bel.gcurve(armF);
-  bel.st(`Punto <b>e</b>: ${desde('a',yEnd,we)}. Une ${X('d','e')} en recta (costado) y ${X('e','e₀')} (bajo).`,`El ancho de la barriga se mantiene hasta el final.`);
+  bel.st(`Punto <b>e</b>: ${desde('a',yEnd,we)}. Une ${X('d','e')} en recta (costado) y ${X('e','e₀')} (bajo).`,`El ancho de la barriga se mantiene hasta el final.`,`${pp('e',yEnd,we)} Rectas d–e (costado) y e–e₀ (bajo).`);
   const e=bel.pos('e',yEnd,we,'final del costado','se');
   const sideF=stroke(d,[{t:'L',p:e}]); bel.guide(d,e); bel.guide(e,e0);
-  bel.st(`Repasa el contorno con línea firme. El lado ${X('a','e₀')} va al doblez de la tela.`,'');
+  bel.st(`Repasa el contorno con línea firme. El lado ${X('a','e₀')} va al doblez de la tela.`,'',`Repasa el contorno. a–e₀ va al doblez.`);
   bel.edge('escote',neckF); bel.edge('hombro',shF); bel.edge('sisa',armF,'libre'); bel.edge('costado',sideF); bel.edge('bajo',stroke(e,[{t:'L',p:e0}]),'libre');
   bel.edge('doblez',stroke(e0,[{t:'L',p:a}]),'doblez');
   bel.grain=[[we*0.45,yEnd*0.4],[we*0.45,yEnd*0.8]]; bel.labels.push({t:'BARRIGA',p:[we*0.45+0.6,yEnd*0.6],rot:90,bold:true,size:0.9});
@@ -523,33 +377,33 @@ function baseBlock(M,E,opt){
   /* ---- ESPALDA ---- */
   const back=new Piece('espalda','Espalda','Cortar 1 al doblez',{mat:opt.mat}); back.origin=[0,0];
   const LshF=G.dist(b,cc), LarmF=strokeLen(armF), LsideF=G.dist(d,e);
-  back.st(`Traza una línea vertical: es el <b>doblez</b> (la columna). Arriba marca el punto <b>A</b>, la nuca.`,'Todos los puntos de esta pieza se miden desde A.');
+  back.st(`Traza una línea vertical: es el <b>doblez</b> (la columna). Arriba marca el punto <b>A</b>, la nuca.`,'Todos los puntos de esta pieza se miden desde A.',`Vertical = doblez. Arriba, <b>A</b> (nuca).`);
   const A=back.pos('A',0,0,'nuca (origen)','nw');
-  back.st(`${Cap(desde('A',L,0))}: punto <b>F</b>.`,`Largo de espalda (${fmt1(M[3])}) ${E.largo<0?'−':'+'} ${fmt1(Math.abs(E.largo))}.${E.largo<0?' Más corto para que la cola se mueva libre.':''}`);
+  back.st(`${Cap(desde('A',L,0))}: punto <b>F</b>.`,`Largo de espalda (${fmt1(M[3])}) ${E.largo<0?'−':'+'} ${fmt1(Math.abs(E.largo))}.${E.largo<0?' Más corto para que la cola se mueva libre.':''}`,`Desde A baja ${f(L)} → <b>F</b>.`);
   const F=back.pos('F',L,0,'final, junto a la cola','w'); back.guide(A,F,{dash:true});
-  back.st(`Punto <b>B</b>: ${desde('A',-tilt,nb)}. Une ${X('A','B')} con una curva que salga recta del doblez: es el escote.`,`La espalda se lleva el 60 % del escote. Sube lo mismo que bajó b en la barriga.`);
+  back.st(`Punto <b>B</b>: ${desde('A',-tilt,nb)}. Une ${X('A','B')} con una curva que salga recta del doblez: es el escote.`,`La espalda se lleva el 60 % del escote. Sube lo mismo que bajó b en la barriga.`,`${pp('B',-tilt,nb)} Curva A–B (escote).`);
   const B=back.pos('B',-tilt,nb,'lado del cuello','n');
   const neckB=neckB_(nb); back.gcurve(neckB);
   const xD=P/2-wb, cMax=xD-Math.max(1,S/8);
   let theta=18; if(B[0]+LshF*Math.cos(theta*Math.PI/180)>cMax) theta=Math.acos(clamp((cMax-B[0])/LshF,-1,1))*180/Math.PI;
   const C=G.add(B,G.mul(G.dir(theta),LshF));
-  back.st(`Punto <b>C</b>: ${desde('A',C[1],C[0])}. Une ${X('B','C')} en recta: es la costura de hombro y mide ${c(LshF)}, igual que ${X('b','c')}.`,`Se coloca para que el hombro de la espalda mida lo mismo que el de la barriga.`);
+  back.st(`Punto <b>C</b>: ${desde('A',C[1],C[0])}. Une ${X('B','C')} en recta: es la costura de hombro y mide ${c(LshF)}, igual que ${X('b','c')}.`,`Se coloca para que el hombro de la espalda mida lo mismo que el de la barriga.`,`${pp('C',C[1],C[0])} Recta B–C (hombro, ${f(LshF)}).`);
   back.pos('C',C[1],C[0],'arriba de la sisa','ne'); const shB=stroke(B,[{t:'L',p:C}]); back.guide(B,C);
   const needArm=S-LarmF, depth=(Cp,Dp)=>Math.min(1.4,G.dist(Cp,Dp)*0.12);
   const mkArm=yD=>{ const D=[xD,yD]; const inn2=G.add(G.lerp(C,D,0.5),G.mul(G.norm(G.perp(G.sub(D,C))),depth(C,D)));
     return stroke(C,[curve(C,inn2,[0.15,1],G.sub(D,C),0.35),curve(inn2,D,G.sub(D,C),[0.2,1],0.35)]); };
   const yD=solveW(y=>strokeLen(mkArm(y))-needArm,C[1]+0.3,C[1]+80,'la sisa de la espalda');
   const D=[xD,yD];
-  back.st(`Punto <b>D</b>: ${desde('A',yD,xD)}. Une ${X('C','D')} con una curva que entre ${c(depth(C,D))} en el centro: es la otra media sisa.`,`${fmt1(xD)} = la mitad del pecho con holgura (${fmt1(M[2])} + ${fmt1(E.pecho)}) menos la mitad de la barriga. La altura es la que hace que la sisa entera mida la pata (${fmt1(M[7])}) + ${fmt1(E.sisa)}.`);
+  back.st(`Punto <b>D</b>: ${desde('A',yD,xD)}. Une ${X('C','D')} con una curva que entre ${c(depth(C,D))} en el centro: es la otra media sisa.`,`${fmt1(xD)} = la mitad del pecho con holgura (${fmt1(M[2])} + ${fmt1(E.pecho)}) menos la mitad de la barriga. La altura es la que hace que la sisa entera mida la pata (${fmt1(M[7])}) + ${fmt1(E.sisa)}.`,`${pp('D',yD,xD)} Curva C–D hacia dentro ${f(depth(C,D))} (sisa).`);
   back.pos('D',yD,xD,'axila, línea de pecho','e');
   const armB=mkArm(yD); back.gcurve(armB);
   const xW=W/2-we, dx=clamp(xD-xW,-0.5*LsideF,0.5*LsideF), xE=xD-dx, limited=Math.abs(xD-xW-dx)>0.05;
   const yE=yD+Math.sqrt(LsideF*LsideF-dx*dx);
-  back.st(`Punto <b>E</b>: ${desde('A',yE,xE)}. Une ${X('D','E')} en recta: es el costado y mide ${c(LsideF)}, igual que ${X('d','e')}.`,limited?`La cintura pediría ${fmt1(xW)}, pero con una barriga tan corta la recta no llega: el resto del ajuste lo hace el faldón.`:`${fmt1(xE)} = la mitad de la cintura con holgura (${fmt1(M[4])} + ${fmt1(E.cintura)}) menos la mitad de la barriga.`);
+  back.st(`Punto <b>E</b>: ${desde('A',yE,xE)}. Une ${X('D','E')} en recta: es el costado y mide ${c(LsideF)}, igual que ${X('d','e')}.`,limited?`La cintura pediría ${fmt1(xW)}, pero con una barriga tan corta la recta no llega: el resto del ajuste lo hace el faldón.`:`${fmt1(xE)} = la mitad de la cintura con holgura (${fmt1(M[4])} + ${fmt1(E.cintura)}) menos la mitad de la barriga.`,`${pp('E',yE,xE)} Recta D–E (costado, ${f(LsideF)}).`);
   const Ep=back.pos('E',yE,xE,'final del costado','e'); const sideB=stroke(D,[{t:'L',p:Ep}]); back.guide(D,Ep);
-  back.st(`Une ${X('E','F')} con una curva redondeada que llegue recta al doblez: es el faldón, que cubre la cadera.`,'');
+  back.st(`Une ${X('E','F')} con una curva redondeada que llegue recta al doblez: es el faldón, que cubre la cadera.`,'',`Curva E–F hasta el doblez (faldón).`);
   const hem=stroke(Ep,[curve(Ep,F,[-0.15,1],[-1,0],0.5,0.45)]); back.gcurve(hem);
-  back.st(`Repasa el contorno con línea firme. El lado ${X('A','F')} va al doblez de la tela.`,'');
+  back.st(`Repasa el contorno con línea firme. El lado ${X('A','F')} va al doblez de la tela.`,'',`Repasa el contorno. A–F va al doblez.`);
   back.edge('escote',neckB); back.edge('hombro',shB); back.edge('sisa',armB,'libre'); back.edge('costado',sideB); back.edge('faldon',hem,'libre');
   back.edge('doblez',stroke(F,[{t:'L',p:A}]),'doblez');
   back.grain=[[xD*0.35,L*0.3],[xD*0.35,L*0.75]]; back.labels.push({t:'ESPALDA',p:[xD*0.35+0.7,L*0.52],rot:90,bold:true,size:1.1});
@@ -575,10 +429,10 @@ const GARMENTS={
   easeSrc:'Valores de partida para tela sin elasticidad, tomados de guías publicadas de ropa para perro: milla milla (pecho +4–5, cuello +2–3), Celebdog (+4–6) y Aury Moda Pet (largo hasta 1 cm antes de la cola).',
   draft(M,E){ WARN=[]; const bb=baseBlock(M,E,{mat:'Polar'});
     const col=new Piece('cuello','Cuello alto','Cortar 1 (rectángulo)'); col.origin=[0,0]; const nl=bb.lens.neck, ch=5;
-    col.st(`Dibuja un rectángulo de ${c(nl)} de largo por ${c(2*ch)} de alto: puntos <b>1</b>, <b>2</b>, <b>3</b> y <b>4</b>.`,`El largo es el escote entero de la prenda; el alto, el doble del cuello (${ch} cm), porque se dobla por la mitad.`);
+    col.st(`Dibuja un rectángulo de ${c(nl)} de largo por ${c(2*ch)} de alto: puntos <b>1</b>, <b>2</b>, <b>3</b> y <b>4</b>.`,`El largo es el escote entero de la prenda; el alto, el doble del cuello (${ch} cm), porque se dobla por la mitad.`,`Rectángulo de ${f(nl)} × ${f(2*ch)}.`);
     col.pos('1',0,0,'esquina (origen)','nw'); const p1=col.pos('2',0,nl,'esquina','ne'), p2=col.pos('3',2*ch,nl,'esquina','se'), p3=col.pos('4',2*ch,0,'esquina','sw');
     const p0=[0,0]; col.guide(p0,p1); col.guide(p1,p2); col.guide(p2,p3); col.guide(p3,p0);
-    col.st(`Marca la línea de doblez a ${c(ch)} de altura. Piquetes en el borde de abajo: la mitad (${c(nl/2)}) va al centro de la espalda; a ${c(0.2*bb.N)} de cada punta, las costuras de hombro.`,'Las dos puntas se unen en el centro de la barriga.');
+    col.st(`Marca la línea de doblez a ${c(ch)} de altura. Piquetes en el borde de abajo: la mitad (${c(nl/2)}) va al centro de la espalda; a ${c(0.2*bb.N)} de cada punta, las costuras de hombro.`,'Las dos puntas se unen en el centro de la barriga.',`Doblar a ${f(ch)}. Piquetes: centro a ${f(nl/2)}; hombros a ${f(0.2*bb.N)} de cada punta.`);
     col.guide([0,ch],[nl,ch],{dash:true});
     col.edge('a',stroke(p0,[{t:'L',p:p1}]),'libre'); col.edge('b',stroke(p1,[{t:'L',p:p2}])); col.edge('c',stroke(p2,[{t:'L',p:p3}]),'libre'); col.edge('d',stroke(p3,[{t:'L',p:p0}]));
     col.grain=[[nl*0.35,ch*0.5],[nl*0.65,ch*0.5]]; col.labels.push({t:'CUELLO · doblar aquí',p:[nl/2,ch-0.3],size:0.7});
@@ -593,31 +447,31 @@ const GARMENTS={
     /* capucha (media) */
     const hd=new Piece('capucha','Capucha','Cortar 2 (una y su simétrica)'); hd.origin=[0,0];
     const base=bb.lens.neck/2, front=(M[11]+E.cara)/2, top0=M[12]+E.capucha;
-    hd.st(`Traza una línea horizontal. A la izquierda marca <b>H</b>; ${desde('H',0,base)}: punto <b>I</b>. ${X('H','I')} se cose al escote.`,`${fmt1(base)} = la mitad del escote de la prenda. H va al centro de la barriga e I al centro de la espalda.`);
+    hd.st(`Traza una línea horizontal. A la izquierda marca <b>H</b>; ${desde('H',0,base)}: punto <b>I</b>. ${X('H','I')} se cose al escote.`,`${fmt1(base)} = la mitad del escote de la prenda. H va al centro de la barriga e I al centro de la espalda.`,`Horizontal: <b>H</b> → <b>I</b> = ${f(base)}.`);
     const H=hd.pos('H',0,0,'centro de la barriga (origen)','sw'); const I=hd.pos('I',0,base,'centro de la espalda','se'); hd.guide(H,I);
-    hd.st(`${Cap(desde('H',-front,0))}: punto <b>J</b>. ${X('H','J')} es el borde de la cara.`,`La mitad del contorno de cara (${fmt1(M[11])}) + ${fmt1(E.cara)} de holgura.`);
+    hd.st(`${Cap(desde('H',-front,0))}: punto <b>J</b>. ${X('H','J')} es el borde de la cara.`,`La mitad del contorno de cara (${fmt1(M[11])}) + ${fmt1(E.cara)} de holgura.`,`Desde H sube ${f(front)} → <b>J</b> (cara).`);
     const J=hd.pos('J',-front,0,'frente','nw'); hd.guide(H,J,{dash:true});
     const chord=G.dist(I,J), top=Math.max(top0,chord+1.5);
     const nrm=G.norm(G.perp(G.sub(J,I))), out=nrm[0]>0?nrm:G.mul(nrm,-1), midIJ=G.lerp(I,J,0.5), tIJ=G.sub(J,I);
     const mk=h=>{ const K=G.add(midIJ,G.mul(out,h)); return stroke(I,[curve(I,K,G.sub(K,I),tIJ,0.4),curve(K,J,tIJ,G.sub(J,K),0.4)]); };
     const hh=solveW(h=>strokeLen(mk(h))-top,0,2*base+front,'la capucha'); const backSeam=mk(hh); const K=G.add(midIJ,G.mul(out,hh));
-    hd.st(`Punto <b>K</b>: ${desde('H',K[1],K[0])}. Une I–K–J con una curva suave: es la costura central (nuca, cabeza, frente) y mide ${c(top)}.`,top>top0+0.05?`El alto de capucha (${fmt1(M[12])}) + ${fmt1(E.capucha)} daría ${fmt1(top0)}, menos que la recta I–J: se alarga para que la capucha tenga fondo.`:`Alto de capucha (${fmt1(M[12])}) + ${fmt1(E.capucha)} de fondo.`);
+    hd.st(`Punto <b>K</b>: ${desde('H',K[1],K[0])}. Une I–K–J con una curva suave: es la costura central (nuca, cabeza, frente) y mide ${c(top)}.`,top>top0+0.05?`El alto de capucha (${fmt1(M[12])}) + ${fmt1(E.capucha)} daría ${fmt1(top0)}, menos que la recta I–J: se alarga para que la capucha tenga fondo.`:`Alto de capucha (${fmt1(M[12])}) + ${fmt1(E.capucha)} de fondo.`,`${pp('K',K[1],K[0])} Curva I–K–J (${f(top)}).`);
     hd.pos('K',K[1],K[0],'costura central','e'); hd.gcurve(backSeam);
-    hd.st(`Repasa el contorno con línea firme. ${X('J','H')} lleva dobladillo o ribb.`,'');
+    hd.st(`Repasa el contorno con línea firme. ${X('J','H')} lleva dobladillo o ribb.`,'',`Repasa el contorno.`);
     hd.edge('base',stroke(H,[{t:'L',p:I}])); hd.edge('central',backSeam); hd.edge('cara',stroke(J,[{t:'L',p:H}]),'libre');
     hd.grain=[[base*0.3,-front*0.2],[base*0.3,-front*0.8]]; hd.labels.push({t:'CAPUCHA',p:[base*0.3+0.6,-front*0.5],rot:90,bold:true,size:0.8});
     /* manga corta */
     const sl=new Piece('manga','Manga','Cortar 2'); sl.origin=[0,0]; const S=bb.lens.arm, sh=Math.max(3,M[7]*0.4), cap=S/9, cuff=M[7];
-    sl.st(`Traza una horizontal. A la izquierda marca <b>M</b>; ${desde('M',0,S)}: punto <b>N</b>.`,`${fmt1(S)} = lo que mide la sisa entera de la prenda (C–D + c–d). M irá hacia la barriga.`);
+    sl.st(`Traza una horizontal. A la izquierda marca <b>M</b>; ${desde('M',0,S)}: punto <b>N</b>.`,`${fmt1(S)} = lo que mide la sisa entera de la prenda (C–D + c–d). M irá hacia la barriga.`,`Horizontal: <b>M</b> → <b>N</b> = ${f(S)}.`);
     const Mm=sl.pos('M',0,0,'costado, lado barriga (origen)','nw'), Nn=sl.pos('N',0,S,'costado, lado espalda','ne'); sl.guide(Mm,Nn,{dash:true});
     const capSt=stroke(Mm,[curve(Mm,[S/2,-cap],[1,-0.5],[1,0],0.4),curve([S/2,-cap],Nn,[1,0],[1,0.5],0.4)]);
     const cps=strokePts(capSt,120); let acc=0, Pp=cps[0]; const tgt=bb.lens.armF;
     for(let i=1;i<cps.length;i++){ const dd=G.dist(cps[i-1],cps[i]); if(acc+dd>=tgt){ Pp=G.lerp(cps[i-1],cps[i],(tgt-acc)/dd); break; } acc+=dd; }
-    sl.st(`Punto <b>O</b>: ${desde('M',-cap,S/2)}. Une M–O–N con una curva suave: es la copa. Marca el piquete <b>P</b> sobre la curva, a ${c(tgt)} de M.`,`La copa sube la novena parte de su ancho. P va a la costura de hombro (c/C); M y N, al costado.`);
+    sl.st(`Punto <b>O</b>: ${desde('M',-cap,S/2)}. Une M–O–N con una curva suave: es la copa. Marca el piquete <b>P</b> sobre la curva, a ${c(tgt)} de M.`,`La copa sube la novena parte de su ancho. P va a la costura de hombro (c/C); M y N, al costado.`,`${pp('O',-cap,S/2)} Curva M–O–N (copa). Piquete P a ${f(tgt)} de M.`);
     sl.pos('O',-cap,S/2,'centro de la copa','n'); sl.pt('P',Pp,{lab:'n'}); sl.gcurve(capSt);
-    sl.st(`Punto <b>Q</b>: ${desde('M',sh,(S-cuff)/2)}. Punto <b>R</b>: ${desde('M',sh,(S+cuff)/2)}. Une M–Q, N–R y Q–R.`,`El largo es la pata entre 2,5 (mínimo 3 cm). El bajo, Q–R, mide el contorno de la pata (${fmt1(M[7])}).`);
+    sl.st(`Punto <b>Q</b>: ${desde('M',sh,(S-cuff)/2)}. Punto <b>R</b>: ${desde('M',sh,(S+cuff)/2)}. Une M–Q, N–R y Q–R.`,`El largo es la pata entre 2,5 (mínimo 3 cm). El bajo, Q–R, mide el contorno de la pata (${fmt1(M[7])}).`,`${pp('Q',sh,(S-cuff)/2)} ${pp('R',sh,(S+cuff)/2)} Une M–Q, N–R, Q–R.`);
     const Q=sl.pos('Q',sh,(S-cuff)/2,'bajo','sw'), R=sl.pos('R',sh,(S+cuff)/2,'bajo','se'); sl.guide(Mm,Q); sl.guide(Nn,R); sl.guide(Q,R);
-    sl.st(`Repasa el contorno con línea firme. Q–R lleva el puño de ribb.`,'');
+    sl.st(`Repasa el contorno con línea firme. Q–R lleva el puño de ribb.`,'',`Repasa el contorno.`);
     sl.edge('copa',capSt); sl.edge('lado2',stroke(Nn,[{t:'L',p:R}])); sl.edge('bajo',stroke(R,[{t:'L',p:Q}]),'libre'); sl.edge('lado1',stroke(Q,[{t:'L',p:Mm}]));
     sl.grain=[[S/2,0.4],[S/2,sh-0.4]];
     const checks=bb.checks.concat([
@@ -637,21 +491,21 @@ const GARMENTS={
   draft(M,E){ WARN=[];
     const pc=new Piece('calzon','Calzón','Cortar 1 al doblez'); pc.origin=[0,0];
     const Wq=(M[4]+E.cintura)/4, Lt=E.trasera+M[10], yK=E.trasera+0.45*M[10], cw=Math.max(2,M[9]/6), leg=M[9]+E.muslo;
-    pc.st(`Traza una línea vertical: es el <b>doblez</b> (el centro: lomo, cola, entre las patas y barriga). Arriba marca <b>A</b>, la cintura por el lomo; ${desde('A',Lt,0)}: punto <b>D</b>, la cintura por la barriga.`,`${fmt1(E.trasera)} cm por encima de la cola + el tiro (${fmt1(M[10])}).`);
+    pc.st(`Traza una línea vertical: es el <b>doblez</b> (el centro: lomo, cola, entre las patas y barriga). Arriba marca <b>A</b>, la cintura por el lomo; ${desde('A',Lt,0)}: punto <b>D</b>, la cintura por la barriga.`,`${fmt1(E.trasera)} cm por encima de la cola + el tiro (${fmt1(M[10])}).`,`Vertical = doblez. <b>A</b> arriba; baja ${f(Lt)} → <b>D</b>.`);
     const A=pc.pos('A',0,0,'cintura por el lomo (origen)','nw'), D=pc.pos('D',Lt,0,'cintura por la barriga','sw'); pc.guide(A,D,{dash:true});
-    pc.st(`Punto <b>B</b>: ${desde('A',0,Wq)}. Punto <b>C</b>: ${desde('A',Lt,Wq)}. Une ${X('A','B')} y ${X('D','C')}: son las cinturas.`,`La cuarta parte de la cintura (${fmt1(M[4])}) + ${fmt1(E.cintura)} de holgura.`);
+    pc.st(`Punto <b>B</b>: ${desde('A',0,Wq)}. Punto <b>C</b>: ${desde('A',Lt,Wq)}. Une ${X('A','B')} y ${X('D','C')}: son las cinturas.`,`La cuarta parte de la cintura (${fmt1(M[4])}) + ${fmt1(E.cintura)} de holgura.`,`${pp('B',0,Wq)} ${pp('C',Lt,Wq)}`);
     const B=pc.pos('B',0,Wq,'cintura, costado','ne'), Cc=pc.pos('C',Lt,Wq,'cintura, costado','se'); pc.guide(A,B); pc.guide(D,Cc);
-    pc.st(`Punto <b>T</b>: ${desde('A',E.trasera,0)}. Sobre el doblez, dibuja medio óvalo de ${c(E.cola)} de alto y ${c(E.cola*0.35)} de ancho, con T en el centro: al abrir la tela queda el agujero de la cola.`,'Pequeño: si no pasa la cola, se agranda en la prueba.');
+    pc.st(`Punto <b>T</b>: ${desde('A',E.trasera,0)}. Sobre el doblez, dibuja medio óvalo de ${c(E.cola)} de alto y ${c(E.cola*0.35)} de ancho, con T en el centro: al abrir la tela queda el agujero de la cola.`,'Pequeño: si no pasa la cola, se agranda en la prueba.',`${pp('T',E.trasera,0)} Medio óvalo ${f(E.cola)} × ${f(E.cola*0.35)} (cola).`);
     pc.pos('T',E.trasera,0,'centro del agujero de la cola','w');
     const th=E.cola, tw=E.cola*0.35; const tail=stroke([0,E.trasera-th/2],[curve([0,E.trasera-th/2],[tw,E.trasera],[1,0],[0,1],0.55),curve([tw,E.trasera],[0,E.trasera+th/2],[0,1],[-1,0],0.55)]);
     pc.gcurve(tail); pc.hole=tail;
-    pc.st(`Punto <b>k</b>: ${desde('A',yK,cw)}. Es la entrepierna.`,`Bajada: ${fmt1(E.trasera)} + el 45 % del tiro. Ancho: el muslo (${fmt1(M[9])}) entre 6, mínimo 2 cm.`);
+    pc.st(`Punto <b>k</b>: ${desde('A',yK,cw)}. Es la entrepierna.`,`Bajada: ${fmt1(E.trasera)} + el 45 % del tiro. Ancho: el muslo (${fmt1(M[9])}) entre 6, mínimo 2 cm.`,`${pp('k',yK,cw)} (entrepierna)`);
     const k=pc.pos('k',yK,cw,'entrepierna','e');
     const mk=s=>{ const P1=[Wq,s],P2=[Wq,Lt-s]; return stroke(P1,[curve(P1,k,[-0.35,1],[-0.15,1],0.5,0.4),curve(k,P2,[0.15,1],[0.35,1],0.4,0.5)]); };
     const s=solveW(x=>leg-strokeLen(mk(x)),0.3,Math.min(yK,Lt-yK)-0.3,'la abertura de pierna');
-    pc.st(`Punto <b>E</b>: ${desde('A',s,Wq)}. Punto <b>F</b>: ${desde('A',Lt-s,Wq)}. Une E–k–F con una curva que pase por k sin hacer pico: es la pierna y mide ${c(leg)}.`,`La pierna mide el muslo (${fmt1(M[9])}) + ${fmt1(E.muslo)}. E y F se colocan para que salga justo esa medida.`);
+    pc.st(`Punto <b>E</b>: ${desde('A',s,Wq)}. Punto <b>F</b>: ${desde('A',Lt-s,Wq)}. Une E–k–F con una curva que pase por k sin hacer pico: es la pierna y mide ${c(leg)}.`,`La pierna mide el muslo (${fmt1(M[9])}) + ${fmt1(E.muslo)}. E y F se colocan para que salga justo esa medida.`,`${pp('E',s,Wq)} ${pp('F',Lt-s,Wq)} Curva E–k–F (pierna, ${f(leg)}).`);
     const Ep=pc.pos('E',s,Wq,'costado','e'), Fp=pc.pos('F',Lt-s,Wq,'costado','e'); const legSt=mk(s); pc.guide(B,Ep); pc.guide(Fp,Cc); pc.gcurve(legSt);
-    pc.st(`Repasa el contorno con línea firme. Se cosen ${X('B','E')} con ${X('C','F')}. En las cinturas deja 1,8 cm de margen (jareta para el elástico) y en las piernas 1,2 cm.`,'');
+    pc.st(`Repasa el contorno con línea firme. Se cosen ${X('B','E')} con ${X('C','F')}. En las cinturas deja 1,8 cm de margen (jareta para el elástico) y en las piernas 1,2 cm.`,'',`Repasa el contorno. Cinturas: margen 1,8 (jareta).`);
     pc.edge('cintura1',stroke(A,[{t:'L',p:B}]),'libre',{sa:1.8}); pc.edge('costado1',stroke(B,[{t:'L',p:Ep}])); pc.edge('pierna',legSt,'libre',{sa:1.2});
     pc.edge('costado2',stroke(Fp,[{t:'L',p:Cc}])); pc.edge('cintura2',stroke(Cc,[{t:'L',p:D}]),'libre',{sa:1.8}); pc.edge('doblez',stroke(D,[{t:'L',p:A}]),'doblez');
     pc.grain=[[Wq*0.6,Lt*0.62],[Wq*0.6,Lt*0.9]]; pc.labels.push({t:'CALZÓN',p:[Wq*0.6+0.7,Lt*0.76],rot:90,bold:true,size:0.8});
@@ -663,143 +517,146 @@ const GARMENTS={
     return {pieces:[pc],checks,seams,cut,warn:WARN};
   }}
 };
-/* ---------- Interfaz ---------- */
+/* ---------- Página única: perro + prenda + medidas + lámina ---------- */
 (function(){
 const $=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const KEY='plan-b-medidas-perros-v1', KEY_UI='plan-b-molde-ui-v1';
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='plan-b-medidas-perros-v1', KEY_UI='plan-b-moldes-ui-v3';
+const FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSd0CAUTO_E_5mEiJnm88kTiDW4BNfUlgeVXwPab-tU-0x0yAQ/formResponse', FORM_FIELD='entry.1650617739';
+const DOGS=['Catica','Max','Ais','Milo'];
+const HELP={'1':'Donde va el collar. Cinta recta, sin apretar.','2':'Lo más ancho del pecho, justo detrás de las patas delanteras.','3':'De la base del cuello (donde el collar) hasta la base de la cola, por el lomo.','4':'Lo más estrecho de la barriga, justo delante de las patas traseras.','5':'De la garganta (donde el collar) hasta entre las patas delanteras.','6':'Por delante, de una pata delantera a la otra, donde nacen.','7':'Lo más grueso de la pata delantera, pegado a la axila.','8':'De entre las patas delanteras hasta justo antes del pene (machos) o hasta las patas traseras (hembras).','9':'Lo más grueso del muslo, junto a la ingle.','10':'De la base de la cola, por debajo entre las patas, hasta la cintura por la barriga.','11':'Alrededor de la cabeza, por delante de las orejas.','12':'De la nuca, por encima de la cabeza, hasta la frente.'};
+const SHORT={'1':'Cuello','2':'Pecho','3':'Largo de espalda','4':'Cintura','5':'Pecho delantero','6':'Separación de patas','7':'Pata delantera','8':'Largo de barriga','9':'Muslo','10':'Tiro','11':'Cara','12':'Alto de capucha'};
 let sessions=[]; try{ const r=JSON.parse(localStorage.getItem(KEY)||'[]'); sessions=Array.isArray(r)?r:[]; }catch(e){}
 let ui={}; try{ ui=JSON.parse(localStorage.getItem(KEY_UI)||'{}')||{}; }catch(e){ ui={}; }
 const saveUI=()=>{ try{ localStorage.setItem(KEY_UI,JSON.stringify(ui)); }catch(e){} };
+const persist=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(sessions)); }catch(e){} };
+const latest=name=>sessions.filter(s=>s.d&&s.d.perro===name).sort((a,b)=>(b.d.fecha||'').localeCompare(a.d.fecha||'')||(b.d.guardado||'').localeCompare(a.d.guardado||''))[0];
+const num=v=>{ const n=Number(String(v).trim().replace(',','.')); return String(v).trim()&&isFinite(n)&&n>0?n:null; };
 
-function latestFor(name){ return sessions.filter(s=>s.d.perro===name).sort((a,b)=>(b.d.fecha||'').localeCompare(a.d.fecha||'')||(b.d.guardado||'').localeCompare(a.d.guardado||''))[0]?.d; }
-const dogs=[...new Set(sessions.map(s=>s.d.perro))].filter(Boolean);
+let dog=ui.dog||'Catica', garment=GARMENTS[ui.garment]?ui.garment:'abriguito', values={};
+function loadValues(){ values={}; const s=latest(dogName()); if(s) Object.entries(s.d.medidas||{}).forEach(([k,o])=>{ if(o&&o.valor!=null) values[k]=o.valor; }); if(ui.draft&&ui.draft[dogName()]) Object.assign(values,ui.draft[dogName()]); }
+const dogName=()=>dog==='__otro'?($('otherName').value.trim()||'Otro perro'):dog;
 
-/* fuente de medidas */
-const sel=$('src');
-sel.innerHTML = dogs.map(n=>`<option value="dog:${esc(n)}">${esc(n)} (medidas guardadas)</option>`).join('')
-  + `<option value="ejemplo">Perro de ejemplo (no es real)</option><option value="mano">Escribir medidas a mano</option>`;
-sel.value = ui.src && [...sel.options].some(o=>o.value===ui.src) ? ui.src : (dogs.length?`dog:${dogs[0]}`:'ejemplo');
-if(!dogs.length) $('noDogs').hidden=false;
-
-function measFromSource(){
-  const v=sel.value;
-  if(v==='ejemplo') return {...EJEMPLO};
-  if(v==='mano') return {...(ui.mano||EJEMPLO)};
-  const d=latestFor(v.slice(4)); const m={}; if(d) Object.entries(d.medidas||{}).forEach(([k,o])=>{ if(o&&o.valor!=null) m[k]=o.valor; });
-  return m;
+function renderChips(){
+  $('dogs').innerHTML=[...DOGS,'__otro'].map(d=>`<button type="button" data-d="${d}" aria-pressed="${d===dog}">${d==='__otro'?'Otro':d}</button>`).join('');
+  $('garments').innerHTML=Object.entries(GARMENTS).map(([k,g])=>`<button type="button" data-g="${k}" aria-pressed="${k===garment}">${g.name}</button>`).join('');
+  $('otherName').hidden=dog!=='__otro';
 }
-/* editor de medidas */
-function renderMeasEditor(m){
-  $('measGrid').innerHTML = MEAS.map(x=>`<label class="mf"><span><span class="code">${x.id}</span> ${esc(x.n)}</span>
-    <input data-m="${x.id}" inputmode="decimal" value="${m[x.id]!=null?String(m[x.id]).replace('.',','):''}" ${sel.value!=='mano'?'readonly':''} aria-label="${esc(x.n)} en cm"></label>`).join('');
-  $('measNote').textContent = sel.value.startsWith('dog:') ? 'Medidas de la última medición guardada en este aparato. Para cambiarlas, corrígelas en la página de medidas.' : sel.value==='ejemplo' ? 'Medidas inventadas de un perro pequeño, solo para ver cómo funciona. No las uses para cortar. Para probar otras, elige «Escribir medidas a mano».' : 'Escríbelas en centímetros, sin holgura. Se guardan en este aparato.';
-}
-$('measGrid').addEventListener('input',e=>{ const k=e.target.dataset.m; if(!k||sel.value!=='mano') return; ui.mano=ui.mano||{}; const n=Number(String(e.target.value).replace(',','.')); if(isFinite(n)&&n>0) ui.mano[k]=n; else delete ui.mano[k]; saveUI(); redraw(); });
-sel.addEventListener('change',()=>{ ui.src=sel.value; if(sel.value==='mano'&&!ui.mano) ui.mano={...EJEMPLO}; saveUI(); renderMeasEditor(measFromSource()); redraw(true); });
+$('dogs').addEventListener('click',e=>{ const b=e.target.closest('[data-d]'); if(!b) return; dog=b.dataset.d; ui.dog=dog; saveUI(); loadValues(); renderChips(); renderMeas(); redraw(); });
+$('garments').addEventListener('click',e=>{ const b=e.target.closest('[data-g]'); if(!b) return; garment=b.dataset.g; ui.garment=garment; saveUI(); renderChips(); renderMeas(); renderEase(); redraw(); });
+$('otherName').addEventListener('change',()=>{ loadValues(); renderMeas(); redraw(); });
 
-/* prenda, pieza, paso */
-let garment = ui.garment && GARMENTS[ui.garment] ? ui.garment : 'abriguito';
-let pieceIdx=0, stepIdx=0, result=null;
-function renderGarmentTabs(){ $('garTabs').innerHTML=Object.entries(GARMENTS).map(([k,g])=>`<button type="button" role="tab" aria-selected="${k===garment}" data-g="${k}">${g.name}</button>`).join(''); }
-$('garTabs').addEventListener('click',e=>{ const b=e.target.closest('[data-g]'); if(!b) return; garment=b.dataset.g; ui.garment=garment; saveUI(); pieceIdx=0; stepIdx=0; renderGarmentTabs(); renderEase(); redraw(true); });
-
-function easeFor(g){ const d=GARMENTS[g].ease; const u=(ui.ease||{})[g]||{}; const o={}; Object.keys(d).forEach(k=>o[k]=u[k]!=null?u[k]:d[k].v); return o; }
-function renderEase(){
-  const d=GARMENTS[garment].ease, e=easeFor(garment);
-  $('easeGrid').innerHTML=Object.entries(d).map(([k,x])=>`<label class="mf"><span>${esc(x.n)}</span><input data-e="${k}" inputmode="decimal" value="${String(e[k]).replace('.',',')}"><small>${esc(x.why)}</small></label>`).join('');
-  $('easeSrc').innerHTML=GARMENTS[garment].easeSrc||'';
+function renderMeas(){
+  $('measTitle').textContent=`Medidas de ${dogName()} para ${GARMENTS[garment].name.toLowerCase()}`;
+  $('meas').innerHTML=GARMENTS[garment].needs.map(k=>`<div class="m"><label for="m${k}"><span class="note">${k}.</span> ${SHORT[k]}</label>
+    <input class="num" id="m${k}" data-k="${k}" inputmode="decimal" value="${values[k]!=null?String(values[k]).replace('.',','):''}" placeholder="cm">
+    <button type="button" class="q" data-q="${k}" aria-label="Dónde se mide: ${SHORT[k]}">?</button><div class="help" id="h${k}" hidden>${HELP[k]}</div></div>`).join('');
 }
-$('easeGrid').addEventListener('input',e=>{ const k=e.target.dataset.e; if(!k) return; const n=Number(String(e.target.value).replace(',','.')); if(!isFinite(n)) return; ui.ease=ui.ease||{}; ui.ease[garment]=ui.ease[garment]||{}; ui.ease[garment][k]=n; saveUI(); redraw(); });
+let tmr=null;
+$('meas').addEventListener('input',e=>{ const k=e.target.dataset.k; if(!k) return; const n=num(e.target.value); if(n==null) delete values[k]; else values[k]=n;
+  ui.draft=ui.draft||{}; ui.draft[dogName()]={...values}; saveUI(); $('status').textContent=''; clearTimeout(tmr); tmr=setTimeout(redraw,350); });
+$('meas').addEventListener('click',e=>{ const b=e.target.closest('[data-q]'); if(!b) return; const h=$('h'+b.dataset.q); h.hidden=!h.hidden; });
+
+/* guardar: mismo formato que la página de medidas, y se envía a la hoja de Dani */
+function today(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+const slug=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'perro';
+async function send(payload){ const body=new URLSearchParams(); body.append(FORM_FIELD,JSON.stringify(payload)); await fetch(FORM_URL,{method:'POST',mode:'no-cors',body}); }
+$('save').addEventListener('click',async()=>{
+  if(!Object.keys(values).length){ $('status').className='status bad'; $('status').textContent='Todavía no hay ninguna medida.'; return; }
+  const name=dogName(), fecha=today(); const prev=latest(name);
+  const medidas={}; Object.entries(values).forEach(([k,v])=>medidas[k]={tomas:[v,null,null],valor:v});
+  const id=(prev&&prev.d.fecha===fecha&&prev.mine)?prev.id:`${slug(name)}-${fecha}-${Math.random().toString(36).slice(2,7)}`;
+  const d={...(prev?prev.d:{}),perro:name,fecha,medidas:{...((prev&&prev.d.medidas)||{}),...medidas},guardado:new Date().toISOString(),notas:(prev&&prev.d.notas)||''};
+  const rec={id,d,pendiente:true,mine:true}; const i=sessions.findIndex(s=>s.id===id); if(i>=0) sessions[i]=rec; else sessions.push(rec); persist();
+  if(ui.draft) delete ui.draft[name]; saveUI();
+  try{ await send({id,...d}); rec.pendiente=false; persist(); $('status').className='status ok'; $('status').textContent=`Guardadas y enviadas a Dani (${name}).`; }
+  catch(e){ $('status').className='status bad'; $('status').textContent='Guardadas en este aparato; se enviarán cuando haya internet.'; }
+});
+
+/* holguras */
+function easeFor(){ const d=GARMENTS[garment].ease, u=(ui.ease||{})[garment]||{}; const o={}; Object.keys(d).forEach(k=>o[k]=u[k]!=null?u[k]:d[k].v); return o; }
+function renderEase(){ const d=GARMENTS[garment].ease, e=easeFor(); $('ease').innerHTML=Object.entries(d).map(([k,x])=>`<label>${esc(x.n)}<input data-e="${k}" inputmode="decimal" value="${String(e[k]).replace('.',',')}"><span>${esc(x.why)}</span></label>`).join(''); }
+$('ease').addEventListener('input',e=>{ const k=e.target.dataset.e; if(!k) return; const n=Number(String(e.target.value).replace(',','.')); if(!isFinite(n)||!String(e.target.value).trim()) return; ui.ease=ui.ease||{}; ui.ease[garment]=ui.ease[garment]||{}; ui.ease[garment][k]=n; saveUI(); clearTimeout(tmr); tmr=setTimeout(redraw,350); });
 $('easeReset').addEventListener('click',()=>{ if(ui.ease) delete ui.ease[garment]; saveUI(); renderEase(); redraw(); });
 
-function readMeas(){ const m={}; document.querySelectorAll('#measGrid input').forEach(i=>{ const n=Number(String(i.value).replace(',','.')); if(i.value.trim()&&isFinite(n)&&n>0) m[i.dataset.m]=n; }); return m; }
-
-function redraw(resetStep){
-  const m=readMeas(); const g=GARMENTS[garment];
-  const missing=g.needs.filter(k=>m[k]==null);
-  $('missing').hidden=!missing.length;
-  $('missing').innerHTML = missing.length?`Faltan medidas para ${esc(g.name.toLowerCase())}: ${missing.map(k=>`<b>${k}</b> ${esc(MEAS.find(x=>x.id===k).n.toLowerCase())}`).join(', ')}. ${sel.value.startsWith('dog:')?'Apúntalas en la página de medidas.':'Escríbelas arriba.'}`:'';
-  if(missing.length){ $('work').hidden=true; return; }
-  $('work').hidden=false;
-  try{ result=g.draft(m,easeFor(garment)); }catch(err){ $('work').hidden=true; $('missing').hidden=false; $('missing').textContent='No se ha podido trazar con estas medidas: '+err.message; return; }
-  if(pieceIdx>=result.pieces.length) pieceIdx=0;
-  if(resetStep) stepIdx=0;
-  renderFicha(); renderPieceTabs(); renderPiece(); renderChecks(); renderCutList();
-}
-function renderPieceTabs(){ $('pieceTabs').innerHTML=result.pieces.map((p,i)=>`<button type="button" role="tab" aria-selected="${i===pieceIdx}" data-p="${i}">${esc(p.name)}</button>`).join('')+`<button type="button" role="tab" aria-selected="${pieceIdx===-1}" data-p="-1">Todas</button>`; }
-$('pieceTabs').addEventListener('click',e=>{ const b=e.target.closest('[data-p]'); if(!b) return; pieceIdx=+b.dataset.p; stepIdx=0; renderPieceTabs(); renderPiece(); });
-const sa=()=>GARMENTS[garment].sa;
-function renderPiece(){
-  if(pieceIdx===-1){ // vista de conjunto
-    $('stage').innerHTML=`<div class="allp">${result.pieces.map(p=>`<figure><figcaption><b>${esc(p.name)}</b> · ${esc(p.cut)}</figcaption>${svgPiece(p,{upto:Infinity,sa:sa(),showSA:$('showSA').checked})}</figure>`).join('')}</div>`;
-    $('steps').innerHTML=''; $('stepNav').hidden=true; $('nowStep').hidden=true; return;
-  }
-  const p=result.pieces[pieceIdx]; const n=p.steps.length; stepIdx=Math.max(0,Math.min(stepIdx,n-1));
-  $('stepNav').hidden=false;
-  $('stage').innerHTML=`<figure class="one"><figcaption><b>${esc(p.name)}</b> · ${esc(p.cut)}</figcaption>${svgPiece(p,{upto:stepIdx,sa:sa(),showSA:$('showSA').checked})}</figure>`;
-  $('stepCount').textContent=`Paso ${stepIdx+1} de ${n}`; $('nowStep').hidden=false; $('nowStep').innerHTML=`<b>${stepIdx+1}.</b> ${p.steps[stepIdx].html}${p.steps[stepIdx].why?`<small class="src">${p.steps[stepIdx].why}</small>`:''}`;
-  $('prev').disabled=stepIdx===0; $('next').disabled=stepIdx===n-1;
-  $('steps').innerHTML=p.steps.map((s,i)=>`<li class="${i===stepIdx?'on':i<stepIdx?'done':''}" data-s="${i}"><button type="button" class="sbtn" data-s="${i}"><span>${s.html}${s.why?`<small class="src">${s.why}</small>`:''}</span></button></li>`).join('')
-    + (p.notes.length?`<li class="pnotes">${p.notes.map(x=>`<p>${x}</p>`).join('')}</li>`:'');
-  const on=$('steps').querySelector('li.on'); if(on&&window.__stepScroll) on.scrollIntoView({block:'nearest',behavior:'smooth'}); window.__stepScroll=false;
-}
-$('steps').addEventListener('click',e=>{ const b=e.target.closest('[data-s]'); if(!b) return; stepIdx=+b.dataset.s; renderPiece(); });
-$('prev').addEventListener('click',()=>{ stepIdx--; window.__stepScroll=true; renderPiece(); });
-$('next').addEventListener('click',()=>{ stepIdx++; window.__stepScroll=true; renderPiece(); });
-$('last').addEventListener('click',()=>{ stepIdx=1e9; renderPiece(); });
-$('showSA').addEventListener('change',renderPiece);
-document.addEventListener('keydown',e=>{ if(e.target.closest('input,textarea,select')) return; if(e.key==='ArrowRight'&&!$('next').disabled){stepIdx++;renderPiece();} if(e.key==='ArrowLeft'&&!$('prev').disabled){stepIdx--;renderPiece();} });
-
-function who(){ return sel.value.startsWith('dog:')?sel.value.slice(4):sel.value==='ejemplo'?'perro de ejemplo':'medidas a mano'; }
-function renderFicha(){
-  const g=GARMENTS[garment], m=readMeas(), E=easeFor(garment);
-  const dog=sel.value.startsWith('dog:')?latestFor(sel.value.slice(4)):null;
-  const signed=v=>(v<-0.05?'sube ':v>0.05?'baja ':'')+(Math.abs(v)>0.05?fmt1(Math.abs(v)):'—');
-  let h=`<header class="fhead"><div><div class="eyebrow">Molde técnico · ${esc(g.name)}</div><h2>${esc(g.name)} para ${esc(who())}</h2>
-    <p class="note">Tela: ${esc(g.tela)} · Margen de costura: ${fmt1(g.sa)} cm en todo el contorno, salvo en el doblez${dog&&dog.fecha?` · Medidas del ${esc(dog.fecha.split('-').reverse().join('/'))}`:''}</p></div>
-    <div class="flegend"><span><i></i>contorno del molde</span><span><i class="fold"></i>doblez de la tela</span><span><i class="sa"></i>línea de corte (con margen)</span><span><i class="g"></i>línea de ayuda</span></div></header>`;
-  result.pieces.forEach((p,i)=>{
-    const o=(p.table||[])[0]; const on=o?o.name:'';
-    h+=`<article class="fpiece"><div class="fdraw"><h3>${i+1}. ${esc(p.name)} <small>${esc(p.cut)}</small></h3>${svgPiece(p,{upto:Infinity,sa:sa(),showSA:true})}</div>
-      <div class="ftext"><h4>Paso a paso</h4><ol class="fsteps">${p.steps.map(s=>`<li>${s.html}${s.why?`<small class="src">${s.why}</small>`:''}</li>`).join('')}</ol>
-      ${p.table&&p.table.length>1?`<h4>Puntos (desde ${esc(on)}, en cm)</h4><table class="pts"><thead><tr><th>Punto</th><th>Baja / sube</th><th>Escuadra →</th><th>Qué es</th></tr></thead><tbody>${p.table.map(r=>`<tr><td><b>${r.name}</b></td><td class="v">${signed(r.down)}</td><td class="v">${Math.abs(r.right)>0.05?fmt1(r.right):'—'}</td><td>${esc(r.what)}</td></tr>`).join('')}</tbody></table>`:''}</div></article>`;
-  });
-  h+=`<div class="fgrid">
-    <div class="fbox"><h4>Qué cortar</h4><table class="pts"><tbody>${result.cut.map(r=>`<tr><td>${r.what}</td><td>${r.mat}</td><td class="v">${r.qty}</td></tr>`).join('')}</tbody></table></div>
-    <div class="fbox"><h4>Lo que mide cada costura</h4><table class="pts"><tbody>${(result.seams||[]).map(s=>`<tr><td>${esc(s.what)}</td><td class="v">${fmt1(s.v)} cm</td></tr>`).join('')}</tbody></table><p class="note">Las curvas se miden con la cinta métrica de canto. Lo que se cose junto mide lo mismo.</p></div>
-    <div class="fbox"><h4>Medidas de ${esc(who())}</h4><table class="pts"><tbody>${g.needs.map(k=>`<tr><td><span class="code">${k}</span> ${esc(MEAS.find(x=>x.id===k).n)}</td><td class="v">${fmt1(m[k])} cm</td></tr>`).join('')}</tbody></table>
-      <p class="note">Holguras: ${Object.entries(g.ease).map(([k,x])=>`${esc(x.n.replace(' (cm)','').toLowerCase())} ${fmt1(E[k])}`).join(' · ')}</p></div>
-    <div class="fbox"><h4>Consejos</h4><ul>
-      <li>Primero, una prueba en tela barata. Si algo tira o sobra, cambia la holgura en la página y vuelve a sacar el molde: no corrijas el papel a mano.</li>
-      <li>Traza a lápiz con escuadra: «baja» es por el doblez y «escuadra» es en ángulo recto hacia la derecha.</li>
-      <li>El molde es media pieza: se corta sobre la tela doblada, con el doblez donde lo indica.</li>
-      <li>Para imprimir a tamaño real, comprueba antes el cuadrado de 10 × 10 cm de la primera hoja.</li></ul></div>
-  </div>`;
-  $('fichaBody').innerHTML=h;
-}
+/* ---- lámina ---- */
+const PAL={'--grid':'#efeae0','--grid-strong':'#ddd5c6','--ink':'#1d1d1f','--ink-soft':'#7a7a7a','--chalk':'#1d1d1f','--paper-2':'#ffffff','--piece':'#f5eedf','--paper':'#fbfaf7'};
+const fixColors=s=>s.replace(/var\((--[a-z0-9-]+)\)/g,(m,v)=>PAL[v]||'#1d1d1f');
+let result=null;
 const checkOk=c=>c.min?c.a>=c.b-c.tol:Math.abs(c.a-c.b)<=c.tol;
-function renderChecks(){
+function redraw(){
+  const g=GARMENTS[garment]; const missing=g.needs.filter(k=>values[k]==null);
+  if(missing.length){ $('warn').hidden=true; $('lamOut').innerHTML=`<p class="note">Faltan ${missing.length===g.needs.length?'las medidas':'estas medidas'}: ${missing.map(k=>`<b>${SHORT[k].toLowerCase()}</b>`).join(', ')}. En cuanto estén, aquí sale el molde.</p>`; result=null; return; }
+  const E=easeFor();
+  try{ result=g.draft({...values},E); }catch(err){ $('lamOut').innerHTML=`<p class="warn">No se ha podido trazar con estas medidas: ${esc(err.message)}</p>`; result=null; return; }
   const bad=result.checks.filter(c=>!checkOk(c)), w=result.warn||[];
   $('warn').hidden=!(bad.length||w.length);
-  $('warn').innerHTML=(w.length?`Con estas medidas no cuadra: ${w.map(esc).join('; ')}. Revisa esas medidas antes de cortar.`:'')+(bad.length?` ${bad.length} comprobación${bad.length>1?'es':''} en naranja (abajo): no cortes tela hasta revisarlas.`:'');
-  $('checks').innerHTML=result.checks.map(c=>{ const ok=checkOk(c); return `<li class="${ok?'ok':'bad'}"><span class="ck">${ok?'✓':'✗'}</span><span>${c.what}</span><span class="v">${fmt1(c.a)} ${c.min?'≥':'/'} ${fmt1(c.b)} cm</span></li>`; }).join('');
+  $('warn').innerHTML=`Revisa las medidas antes de cortar: ${[...w,...bad.map(c=>c.what.split('.')[0].toLowerCase())].map(esc).join('; ')}.`;
+  $('lamOut').innerHTML=`<div class="lamwrap" id="lamwrap" title="Toca para ampliar">${lamina(result,E)}</div>`;
+  sizePieces(); fit();
 }
-function renderCutList(){ $('cutList').innerHTML=result.cut.map(r=>`<tr><td>${r.what}</td><td>${r.mat}</td><td class="v">${r.qty}</td></tr>`).join(''); }
+function lamina(r,E){
+  const g=GARMENTS[garment], name=dogName(), f=n=>fmt1(n);
+  const signed=v=>v<-0.05?'sube '+f(-v):v>0.05?'baja '+f(v):'—';
+  const pcs=r.pieces.map(p=>`<div class="pc"><div class="t">${esc(p.name)} <small>· ${esc(p.cut.toLowerCase())}</small></div>${fixColors(svgPiece(p,{upto:Infinity,sa:g.sa,showSA:true}))}</div>`).join('');
+  const steps=r.pieces.map(p=>`<div><div class="pname">${esc(p.name)}</div><ol>${p.steps.map(s=>`<li>${s.brief}</li>`).join('')}</ol></div>`).join('');
+  const pts=r.pieces.filter(p=>p.table&&p.table.length>1).map(p=>`<div class="pname">${esc(p.name)} <span style="text-transform:none">(desde ${esc(p.table[0].name)})</span></div><table><tbody>${p.table.slice(1).map(t=>`<tr><td class="p">${t.name}</td><td class="v">${signed(t.down)}</td><td class="v">${Math.abs(t.right)>0.05?'derecha '+f(t.right):'—'}</td><td>${esc(t.what)}</td></tr>`).join('')}</tbody></table>`).join('');
+  const meas=g.needs.map(k=>`<tr><td>${SHORT[k]}</td><td class="v">${f(values[k])} cm</td></tr>`).join('');
+  const cut=r.cut.map(c=>`<tr><td>${c.what}</td><td class="v">${c.qty}</td></tr>`).join('');
+  const s=latest(name); const fecha=s&&s.d.fecha?s.d.fecha.split('-').reverse().join('/'):'';
+  return `<div class="lam" id="lam">
+   <div class="lam-h"><div><h3>Molde base de ${esc(g.name.toLowerCase())}</h3><div class="for">para ${esc(name)}</div></div>
+     <div class="meta">Medidas en cm · tela: ${esc(g.tela)}<br>Margen de costura: ${f(g.sa)} cm (al doblez, nada)${fecha?`<br>Medidas del ${esc(fecha)}`:''}</div></div>
+   <div class="lam-g">
+     <div><h4>Molde técnico</h4><div class="pcs" id="pcs">${pcs}</div>
+       <h4 style="margin-top:14px">Paso a paso del trazado</h4><div class="steps ${r.pieces.length===1?'one':''}">${steps}</div></div>
+     <div>
+       <div class="box"><h4>Puntos y medidas (cm)</h4>${pts}<p class="sans" style="font-size:11.5px;color:#666;margin:6px 0 0">«Baja» es por la línea del doblez; «derecha», a escuadra.</p></div>
+       <div class="box"><h4>Medidas de ${esc(name)}</h4><table><tbody>${meas}</tbody></table></div>
+       <div class="box"><h4>Qué cortar</h4><table><tbody>${cut}</tbody></table></div>
+       <div class="box"><h4>Simbología</h4><div class="sym"><i></i><span>Línea de molde</span><i class="f"></i><span>Doblez de la tela</span><i class="c"></i><span>Línea de corte (con margen)</span><i class="a"></i><span>Línea de ayuda</span></div></div>
+       <div class="box"><h4>Consejos</h4><ul><li>Primero, una prueba en tela barata.</li><li>Si queda justo o suelto, cambia la holgura en «Ajustes» y saca el molde otra vez.</li><li>Para imprimir a tamaño real, mide antes el cuadrado de 10 × 10 cm.</li></ul></div>
+     </div>
+   </div></div>`;
+}
+function sizePieces(){
+  // misma escala para todas las piezas, para que se vean en proporción
+  const box=$('pcs'); if(!box) return; const svgs=[...box.querySelectorAll('svg')];
+  const vb=svgs.map(s=>s.viewBox.baseVal); const W=690, H=520, gap=18;
+  let best=0;
+  for(const rows of [1,2]){
+    const per=Math.ceil(vb.length/rows); let k=Infinity;
+    for(let r=0;r<rows;r++){ const seg=vb.slice(r*per,(r+1)*per); if(!seg.length) continue; const sw=seg.reduce((a,v)=>a+v.width,0); k=Math.min(k,(W-gap*(seg.length-1))/sw); }
+    const hh=[...Array(rows)].map((_,r)=>Math.max(...vb.slice(r*per,(r+1)*per).map(v=>v.height),0)).reduce((a,b)=>a+b,0);
+    k=Math.min(k,(H-gap*(rows-1))/hh); if(k>best) best=k;
+  }
+  svgs.forEach((s,i)=>{ s.style.width=(vb[i].width*best)+'px'; s.style.height=(vb[i].height*best)+'px'; });
+}
+let zoom=false;
+function fit(){ const w=$('lamwrap'), l=$('lam'); if(!w||!l) return; const sc=zoom?1:Math.min(1,w.clientWidth/1200); l.style.transform=`scale(${sc})`; w.style.height=(l.offsetHeight*sc)+'px'; w.style.overflowX=zoom?'auto':'hidden'; w.style.cursor=zoom?'zoom-out':'zoom-in'; }
+window.addEventListener('resize',fit);
+$('lamOut').addEventListener('click',e=>{ if(!e.target.closest('#lamwrap')) return; zoom=!zoom; fit(); });
 
-/* imprimir */
-$('printReal').addEventListener('click',()=>{
-  const g=GARMENTS[garment]; const who = sel.value.startsWith('dog:')?sel.value.slice(4):sel.value==='ejemplo'?'perro de ejemplo':'medidas a mano';
-  const t=tiledPages(result.pieces,sa(),$('showSA').checked,{title:`${esc(g.name)} · ${esc(who)}`,sub:`${$('showSA').checked?`línea discontinua = corte (margen ${fmt1(sa())} cm)`:'sin margen de costura'} · imprime al 100 %`});
-  $('printArea').innerHTML=t.html; document.body.classList.add('printing-sheets');
-  setTimeout(()=>{ window.print(); },60);
+/* descargar imagen (PNG) */
+function loadH2C(){ return window.html2canvas?Promise.resolve():new Promise((res,rej)=>{ const s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
+$('png').addEventListener('click',async()=>{
+  if(!result){ $('pngStatus').textContent='Primero hacen falta las medidas.'; return; }
+  $('pngStatus').className='status'; $('pngStatus').textContent='Preparando la imagen…';
+  try{ await loadH2C(); const l=$('lam'); const prev=l.style.transform; l.style.transform='none';
+    const cv=await html2canvas(l,{scale:2,backgroundColor:'#fbfaf7',logging:false}); l.style.transform=prev; fit();
+    const a=document.createElement('a'); a.download=`molde-${slug(GARMENTS[garment].name)}-${slug(dogName())}.png`; a.href=cv.toDataURL('image/png'); document.body.appendChild(a); a.click(); a.remove();
+    $('pngStatus').className='status ok'; $('pngStatus').textContent='Imagen descargada.'; }
+  catch(e){ $('pngStatus').className='status bad'; $('pngStatus').textContent='No se pudo crear la imagen en este aparato. Haz una captura de pantalla de la lámina.'; }
 });
-function printFicha(){ $('printArea').innerHTML=`<div class="fichaprint">${$('fichaBody').innerHTML}</div>`; document.body.classList.add('printing-steps'); setTimeout(()=>window.print(),60); }
-$('printSteps').addEventListener('click',printFicha); $('printFicha').addEventListener('click',printFicha);
-$('printReal2').addEventListener('click',()=>$('printReal').click());
-window.addEventListener('afterprint',()=>{ document.body.classList.remove('printing-sheets','printing-steps'); $('printArea').innerHTML=''; });
+/* imprimir a tamaño real */
+$('real').addEventListener('click',()=>{
+  if(!result) return; const g=GARMENTS[garment];
+  const t=tiledPages(result.pieces,g.sa,true,{title:`${esc(g.name)} · ${esc(dogName())}`,sub:`línea discontinua = corte (margen ${fmt1(g.sa)} cm) · imprime al 100 %`});
+  $('printArea').innerHTML=t.html; document.body.classList.add('printing-sheets'); setTimeout(()=>window.print(),60);
+});
+window.addEventListener('afterprint',()=>{ document.body.classList.remove('printing-sheets'); $('printArea').innerHTML=''; });
 
-renderGarmentTabs(); renderEase(); renderMeasEditor(measFromSource()); redraw(true);
+loadValues(); renderChips(); renderMeas(); renderEase(); redraw();
 })();
 </script>
 </body></html>
