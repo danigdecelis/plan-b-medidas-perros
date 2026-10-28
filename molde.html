@@ -120,6 +120,28 @@ thead th{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-tran
 .legendrow i{display:inline-block;width:26px;height:0;border-top:2px solid var(--ink)}
 .legendrow i.fold{border-top:2px dashed var(--ink)} .legendrow i.sa{border-top:1.5px dashed var(--ink-soft)} .legendrow i.new{border-top:3px solid var(--chalk)}
 #printArea{display:none}
+small.src{display:block;font-size:13.5px;line-height:1.4;color:var(--ink-soft);margin-top:3px}
+.fhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.fhead h2{margin:.1em 0}
+.flegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-soft)}
+.flegend span{display:inline-flex;align-items:center;gap:6px}
+.flegend i{display:inline-block;width:24px;border-top:2px solid var(--ink)}
+.flegend i.fold{border-top:2px dashed var(--ink)} .flegend i.sa{border-top:1.5px dashed var(--ink-soft)} .flegend i.g{border-top:1px dashed var(--ink-soft)}
+.fpiece{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;break-inside:avoid}
+@media (max-width:760px){.fpiece{grid-template-columns:minmax(0,1fr)}}
+.fpiece h3 small{font-weight:400;color:var(--ink-soft);font-size:14px}
+.fpiece svg.draft{max-height:560px}
+.ftext h4,.fbox h4{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:4px 0 8px;font-family:var(--f-mono)}
+ol.fsteps{margin:0 0 14px;padding-left:1.4em;display:flex;flex-direction:column;gap:8px}
+ol.fsteps li{padding-left:4px}
+table.pts{border-collapse:collapse;width:100%;font-size:14px}
+table.pts td,table.pts th{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.pts td.v{font-family:var(--f-mono);white-space:nowrap;text-align:right}
+table.pts th{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.fbox{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.fbox ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
+#ficha{gap:16px}
 .now{font-size:16px;line-height:1.5;background:var(--chalk-soft);border-radius:8px;padding:10px 12px;margin-top:8px}
 @media (min-width:861px){.now{display:none}}
 @media print{
@@ -133,6 +155,15 @@ thead th{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-tran
   :root:root:root{--paper:#fff;--paper-2:#fff;--grid:#eee;--grid-strong:#ddd;--ink:#000;--ink-soft:#555;--line:#ccc;--chalk:#000;--chalk-soft:#eee;--piece:transparent}
   .sheet-h{font:11px/1.3 sans-serif;margin-bottom:2mm;color:#333}
   .stepsheet{color:#000;font:11pt/1.45 sans-serif}
+  .fichaprint{color:#000;font:10.5pt/1.4 sans-serif}
+  .fichaprint .fpiece{display:block;border:1px solid #999;margin-bottom:6mm;overflow:visible;break-inside:auto;page-break-inside:auto}
+  .fichaprint .fpiece::after{content:"";display:block;clear:both}
+  .fichaprint .fdraw{float:left;width:75mm;margin-right:6mm}
+  .fichaprint .fdraw{break-inside:avoid}
+  .fichaprint svg.draft{max-height:125mm}
+  .fichaprint .fgrid{grid-template-columns:1fr 1fr}
+  .fichaprint .fbox{break-inside:avoid}
+  .fichaprint b.num{background:none;border:1px solid #999}
   .stepsheet h3{margin-top:8mm;break-after:avoid}
   .stepsheet .ss{display:grid;grid-template-columns:70mm 1fr;gap:6mm;break-inside:avoid}
   .stepsheet svg{width:auto;height:auto;max-width:70mm;max-height:120mm}
@@ -147,7 +178,7 @@ thead th{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-tran
 <header class="narrow">
   <div class="eyebrow">Plan B · Producto propio · <a href="./">Medidas</a> → Molde</div>
   <h1>Del cuerpo al molde</h1>
-  <p class="lead">El paso a paso para pasar las medidas de cada perro al papel, como en el PDF del blazer: puntos con letra y «de A a B tantos centímetros». Eliges perro y prenda, y los números salen con sus medidas.</p>
+  <p class="lead">La ficha técnica de cada prenda con los centímetros de cada perro: el molde dibujado con sus medidas, el paso a paso («desde A baja tanto y escuadra tanto») y la tabla de puntos. Eliges perro y prenda y sale sola.</p>
 </header>
 
 <section id="como" class="narrow" style="max-width:none">
@@ -155,7 +186,7 @@ thead th{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-tran
   <ol class="steps0">
     <li><b>Mide primero</b> en la <a href="./">página de medidas</a>. Lo que guardes allí aparece aquí solo, si usas el mismo móvil o la misma compu.</li>
     <li><b>Elige perro y prenda.</b> Cada prenda tiene sus piezas (espalda, barriga…) y cada pieza, su lista de pasos.</li>
-    <li><b>Traza en papel</b> siguiendo los pasos. Ve tocando «Siguiente»: el dibujo añade en azul lo que marca ese paso. O imprime el molde a tamaño real.</li>
+    <li><b>Traza en papel</b> con la ficha: cada pieza tiene su dibujo con las medidas, el paso a paso y la tabla de puntos («desde A baja tanto y escuadra tanto»). O imprime el molde a tamaño real.</li>
     <li><b>Prueba en tela barata.</b> Si algo tira o sobra, no corrijas el papel a mano: cambia la holgura de esa zona aquí abajo y vuelve a sacarlo. Así el arreglo vale para los cuatro perros.</li>
   </ol>
 </section>
@@ -178,9 +209,17 @@ thead th{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-tran
 </section>
 
 <div id="work">
-<section id="trazado">
-  <h2>Trazado paso a paso</h2>
+<section id="ficha">
   <p class="banner" id="warn" hidden></p>
+  <div id="fichaBody"></div>
+  <div class="nav">
+    <button type="button" id="printFicha">Imprimir esta ficha</button>
+    <button type="button" class="ghost" id="printReal2">Imprimir el molde a tamaño real</button>
+  </div>
+</section>
+<section id="trazado">
+  <h2>Trazar con ayuda, paso a paso</h2>
+  <p class="note">Lo mismo que la ficha, pero de uno en uno: cada «Siguiente» marca en azul lo que se traza en ese paso.</p>
   <div class="tabs small" id="pieceTabs" role="tablist" aria-label="Pieza"></div>
   <div class="bench">
     <div class="stagebox">
@@ -206,7 +245,7 @@ thead th{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-tran
   <p>A tamaño real sale en varias hojas A4 que se pegan con celo: cada hoja dice su sitio (A1, A2…). Antes de cortar, mide el cuadrado de prueba de la primera hoja: tiene que dar <b>10 × 10 cm</b>. Si no, imprime otra vez eligiendo «tamaño real» o «escala 100 %», nunca «ajustar a la página».</p>
   <div class="nav">
     <button type="button" id="printReal">Imprimir el molde a tamaño real</button>
-    <button type="button" class="ghost" id="printSteps">Imprimir la hoja de pasos</button>
+    <button type="button" class="ghost" id="printSteps">Imprimir la ficha</button>
   </div>
 </section>
 
@@ -318,8 +357,8 @@ function fmt1(n){ return n==null||!isFinite(n)?'—':(Math.round(n*10)/10).toLoc
 function svgPiece(piece,opt){
   // opt: {upto: índice de paso visible (Infinity = todo), sa: margen, showSA, final:boolean}
   const upto=opt.upto==null?Infinity:opt.upto;
-  const bb=piece.bbox(); const pad=Math.max(2.5,(opt.showSA?opt.sa:0)+1.6);
-  const x0=bb.x0-pad,y0=bb.y0-pad,w=bb.x1-bb.x0+2*pad,h=bb.y1-bb.y0+2*pad;
+  const bb=piece.bbox(); const pad=Math.max(2.5,(opt.showSA?opt.sa:0)+1.6); const padL=pad+(opt.dims===false?0:2.2);
+  const x0=bb.x0-padL,y0=bb.y0-pad,w=bb.x1-bb.x0+pad+padL,h=bb.y1-bb.y0+2*pad;
   const S=Math.max(w,h); const fs=Math.max(0.55,Math.min(1.1,S/30)); const sw=fs*0.09;
   let g='';
   // cuadrícula de 1 cm y 5 cm
@@ -335,6 +374,13 @@ function svgPiece(piece,opt){
     if(e.kind==='guide') g+=`<line x1="${e.a[0]}" y1="${e.a[1]}" x2="${e.b[0]}" y2="${e.b[1]}" stroke="${c}" stroke-width="${wt}" stroke-dasharray="${e.dash?fs*0.4+' '+fs*0.3:'none'}" opacity="${cur(e)?1:.7}"/>`;
     if(e.kind==='gcurve') g+=`<path d="${strokeD(e.st)}" fill="none" stroke="${c}" stroke-width="${wt}" stroke-dasharray="${fs*0.4} ${fs*0.3}"/>`;
   });
+  if(opt.dims!==false){ const seenV=[];
+    piece.els.filter(vis).forEach(e=>{
+      const col=cur(e)?'var(--chalk)':'var(--ink-soft)', f=fs*0.68;
+      if(e.kind==='dimh'){ const mx=(e.x0+e.x1)/2; g+=`<text x="${mx}" y="${e.y-f*0.35}" font-size="${f}" text-anchor="middle" fill="${col}" font-family="IBM Plex Mono,monospace" paint-order="stroke" stroke="var(--paper-2)" stroke-width="${f*0.25}">${e.label}</text>`; }
+      if(e.kind==='dimv'){ if(seenV.some(v=>Math.abs(v-e.y)<f*0.9)) return; seenV.push(e.y);
+        g+=`<line x1="${e.x-fs*0.35}" y1="${e.y}" x2="${e.x}" y2="${e.y}" stroke="${col}" stroke-width="${sw}"/><text x="${e.x-fs*0.45}" y="${e.y+f*0.33}" font-size="${f}" text-anchor="end" fill="${col}" font-family="IBM Plex Mono,monospace">${e.label}</text>`; }
+    }); }
   piece.els.filter(vis).forEach(e=>{
     if(e.kind!=='edge') return; const k=e.e.type==='doblez';
     const c=cur(e)?'var(--chalk)':'var(--ink)';
@@ -412,195 +458,209 @@ const MEAS=[
  {id:'5',n:'Largo de pecho delantero'},{id:'6',n:'Separación de patas delanteras'},{id:'7',n:'Contorno de pata delantera'},{id:'8',n:'Largo de barriga'},
  {id:'9',n:'Contorno de muslo'},{id:'10',n:'Tiro'},{id:'11',n:'Contorno de cara'},{id:'12',n:'Alto de capucha'}];
 const EJEMPLO={'1':26,'2':42,'3':34,'4':34,'5':12,'6':5,'7':12,'8':16,'9':15,'10':22,'11':28,'12':20};
-let CURM={}, WARN=[];
-const c=n=>`<b class="num">${fmt1(n)} cm</b>`;                                   // número destacado
-const m=id=>`medida <span class="code">${id}</span> (${fmt1(CURM[id])})`;      // medida del perro, con su valor
-const X=(a,b)=>`<b class="seg">${a}–${b}</b>`;                                   // segmento
-/* resolver con aviso: si no hay solución entre a y b, devuelve el extremo más cercano y lo apunta */
+let WARN=[];
+const c=n=>`<b class="num">${fmt1(n)} cm</b>`;
+const X=(a,b)=>`<b class="seg">${a}–${b}</b>`;
 function solveW(f,a,b,what){ const fa=f(a), fb=f(b); if((fa>0)===(fb>0)){ WARN.push(what); return Math.abs(fa)<Math.abs(fb)?a:b; } return solve(f,a,b); }
+const Cap=t=>t.charAt(0).toUpperCase()+t.slice(1);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 
-/* ===== Molde base del cuerpo: espalda + barriga, con sisa entre las dos =====
-   La espalda del perro es la espalda; la barriga, el delantero; la pata delantera es el brazo, pero sale por debajo:
-   la «costura de hombro» va del lado del cuello a la pata. */
+/* Paso con texto corto (lo que se hace) y, aparte, de dónde sale el número (en palabras). */
+Piece.prototype.st=function(t,w){ this.steps.push({html:t,why:w||''}); this.k=this.steps.length-1; return this; };
+/* Punto a escuadra desde el origen de la pieza: «desde A baja X y escuadra Y». Deja guías y cotas en el dibujo
+   y una fila en la tabla de puntos. */
+Piece.prototype.pos=function(name,down,right,what,lab){
+  const o=this.origin||[0,0]; const p=[o[0]+right,o[1]+down];
+  this.pt(name,p,{lab});
+  if(Math.abs(right)>0.05) { this.guide([o[0],p[1]],p,{dash:true}); this.els.push({kind:'dimh',y:p[1],x0:o[0],x1:p[0],label:fmt1(right),step:this.k}); }
+  if(Math.abs(down)>0.05) this.els.push({kind:'dimv',x:o[0],y:p[1],label:(down<0?'↑':'')+fmt1(Math.abs(down)),step:this.k});
+  (this.table=this.table||[]).push({name,down,right,what});
+  return p;
+};
+const desde=(o,down,right)=>{
+  const v=down<-0.05?`sube ${c(-down)}`:down>0.05?`baja ${c(down)}`:'';
+  const h=Math.abs(right)>0.05?`escuadra ${c(right)} a la derecha`:'';
+  return `desde <b>${o}</b> ${[v,h].filter(Boolean).join(' y ')}`;
+};
+
+/* ===== Molde base del cuerpo: espalda + barriga, con la sisa entre las dos ===== */
 function baseBlock(M,E,opt){
   const N=M[1]+E.cuello, P=M[2]+E.pecho, W=M[4]+E.cintura, S=M[7]+E.sisa;
-  const L=M[3]+E.largo;
-  const tilt=N/10;                                   // el collar va inclinado: la garganta queda más adelante que la nuca
+  const L=M[3]+E.largo, tilt=N/10;
   const neckF_=k=>stroke([0,0],[curve([0,0],[k,tilt],[1,0],[0.55,0.83],0.45,0.35)]);
   const neckB_=k=>stroke([0,0],[curve([0,0],[k,-tilt],[1,0],[0.6,-0.8],0.45,0.35)]);
-  const nf=solveW(k=>strokeLen(neckF_(k))-0.2*N,0,N,'escote de la barriga');   // la barriga se lleva el 40 % del escote
-  const nb=solveW(k=>strokeLen(neckB_(k))-0.3*N,0,N,'escote de la espalda');   // la espalda, el 60 %
+  const nf=solveW(k=>strokeLen(neckF_(k))-0.2*N,0,N,'escote de la barriga');
+  const nb=solveW(k=>strokeLen(neckB_(k))-0.3*N,0,N,'escote de la espalda');
   const wb=M[6]/2+2, wbTop=M[6]/2+0.75, we=M[6]/2+2;
-  const short=opt.bellyShort||0;
-  const yEnd=M[5]+M[8]-short;
-  const hMax=(yEnd-1.5)-(M[5]-1);
-  let hBelly=S*0.30; if(hBelly>hMax){ hBelly=Math.max(1.5,hMax); }
+  const short=opt.bellyShort||0, yEnd=M[5]+M[8]-short;
+  const hMax=(yEnd-1.5)-(M[5]-1); let hBelly=S*0.30; if(hBelly>hMax) hBelly=Math.max(1.5,hMax);
   if(hMax<1.5) WARN.push('la barriga es muy corta para la sisa (medida 8)');
 
   /* ---- BARRIGA ---- */
-  const bel=new Piece('barriga','Barriga','Cortar 1 al doblez',{mat:opt.mat});
-  bel.step(`Dibuja una línea vertical: será el <b>doblez</b> (centro de la barriga, el esternón). Marca arriba el punto <b>a</b>: la garganta, donde empieza el largo de pecho delantero.`);
-  const a=bel.pt('a',[0,0],{lab:'nw'});
-  bel.step(`${X('a','e₀')} = largo de pecho delantero ${m(5)} + largo de barriga ${m(8)}${short?` − ${fmt1(short)} de la pretina de ribb (si no, en los machos taparía el pene)`:''} = ${c(yEnd)}.`);
-  const e0=bel.pt('e₀',[0,yEnd],{lab:'w'}); bel.guide(a,e0,{dash:true});
-  bel.step(`Escote. Desde <b>a</b> escuadra a la derecha ${c(nf)} y baja ${c(tilt)} (cuello con holgura ÷ 10): punto <b>b</b>. Une ${X('a','b')} con una curva que salga recta del doblez; con la cinta de canto debe medir ${c(0.2*N)}: el 40 % de medio escote (cuello ${m(1)} + ${fmt1(E.cuello)} de holgura = ${fmt1(N)}, la mitad ${fmt1(N/2)}).`);
-  const b=bel.pt('b',[nf,tilt],{lab:'ne'});
-  const neckF=neckF_(nf); bel.gcurve(neckF); bel.guide([0,tilt],b,{dash:true});
-  bel.step(`Sisa, arriba. Baja por el doblez ${c(M[5]-1)} (${m(5)} − 1). Escuadra a la derecha ${c(wbTop)} (separación de patas ${m(6)} ÷ 2 + 0,75): punto <b>c</b>. La recta ${X('b','c')} es la costura de hombro.`);
-  const cc=bel.pt('c',[wbTop,M[5]-1],{lab:'e'}); bel.guide([0,M[5]-1],cc,{dash:true});
-  const shF=stroke(b,[{t:'L',p:cc}]); bel.guide(b,cc);
+  const bel=new Piece('barriga','Barriga','Cortar 1 al doblez',{mat:opt.mat}); bel.origin=[0,0];
+  bel.st(`Traza una línea vertical: es el <b>doblez</b> de la tela (el centro de la barriga). Arriba marca el punto <b>a</b>, la garganta.`,'Todos los puntos de esta pieza se miden desde a: bajando por el doblez y escuadrando hacia la derecha.');
+  const a=bel.pos('a',0,0,'garganta (origen)','nw');
+  bel.st(`${Cap(desde('a',yEnd,0))}: punto <b>e₀</b>.`,`Largo de pecho delantero (${fmt1(M[5])}) + largo de barriga (${fmt1(M[8])})${short?` − ${fmt1(short)} de la pretina, para que en los machos no tape el pene`:''}.`);
+  const e0=bel.pos('e₀',yEnd,0,'final de la barriga','w'); bel.guide(a,e0,{dash:true});
+  bel.st(`Punto <b>b</b>: ${desde('a',tilt,nf)}. Une ${X('a','b')} con una curva que salga recta del doblez: es el escote.`,`La barriga se lleva el 40 % del escote y la espalda el 60 %. Baja ${fmt1(tilt)} porque el collar va inclinado: la garganta queda más adelante que la nuca.`);
+  const b=bel.pos('b',tilt,nf,'lado del cuello','ne');
+  const neckF=neckF_(nf); bel.gcurve(neckF);
+  bel.st(`Punto <b>c</b>: ${desde('a',M[5]-1,wbTop)}. Une ${X('b','c')} en recta: es la costura de hombro.`,`c es donde empieza la pata: largo de pecho delantero − 1. El ancho es la mitad de la separación de patas + 0,75.`);
+  const cc=bel.pos('c',M[5]-1,wbTop,'arriba de la sisa','e'); const shF=stroke(b,[{t:'L',p:cc}]); bel.guide(b,cc);
   const dB=0.6;
-  bel.step(`Sisa, abajo. Desde <b>c</b> baja ${c(hBelly)} y sitúa <b>d</b> a ${c(wb)} del doblez (separación ÷ 2 + 2). Une ${X('c','d')} con una curva que entre ${c(dB)} hacia el doblez en su mitad: es media sisa.`);
-  const d=bel.pt('d',[wb,cc[1]+hBelly],{lab:'e'});
+  bel.st(`Punto <b>d</b>: ${desde('a',M[5]-1+hBelly,wb)}. Une ${X('c','d')} con una curva que entre ${c(dB)} en el centro: es media sisa.`,`d es la axila; el ancho es la mitad de la separación de patas + 2.`);
+  const d=bel.pos('d',M[5]-1+hBelly,wb,'axila','e');
   const inn=G.add(G.lerp(cc,d,0.5),G.mul(G.norm(G.perp(G.sub(d,cc))),dB));
   const armF=stroke(cc,[curve(cc,inn,[-0.2,1],G.sub(d,cc),0.3),curve(inn,d,G.sub(d,cc),[0.25,1],0.3)]); bel.gcurve(armF);
-  bel.step(`Costado. Baja de <b>d</b> en recta hasta la altura de <b>e₀</b>, a ${c(we)} del doblez: punto <b>e</b>. ${X('e','e₀')} es el bajo de la barriga.`);
-  const e=bel.pt('e',[we,yEnd],{lab:'se'});
+  bel.st(`Punto <b>e</b>: ${desde('a',yEnd,we)}. Une ${X('d','e')} en recta (costado) y ${X('e','e₀')} (bajo).`,`El ancho de la barriga se mantiene hasta el final.`);
+  const e=bel.pos('e',yEnd,we,'final del costado','se');
   const sideF=stroke(d,[{t:'L',p:e}]); bel.guide(d,e); bel.guide(e,e0);
-  bel.step(`Repasa el contorno: escote ${X('a','b')}, hombro ${X('b','c')}, sisa ${X('c','d')}, costado ${X('d','e')} y bajo ${X('e','e₀')}. El lado ${X('a','e₀')} va al doblez de la tela.`);
+  bel.st(`Repasa el contorno con línea firme. El lado ${X('a','e₀')} va al doblez de la tela.`,'');
   bel.edge('escote',neckF); bel.edge('hombro',shF); bel.edge('sisa',armF,'libre'); bel.edge('costado',sideF); bel.edge('bajo',stroke(e,[{t:'L',p:e0}]),'libre');
   bel.edge('doblez',stroke(e0,[{t:'L',p:a}]),'doblez');
-  bel.grain=[[we*0.45,yEnd*0.35],[we*0.45,yEnd*0.75]]; bel.labels.push({t:'BARRIGA',p:[we*0.45+0.6,yEnd*0.55],rot:90,bold:true,size:0.9});
+  bel.grain=[[we*0.45,yEnd*0.4],[we*0.45,yEnd*0.8]]; bel.labels.push({t:'BARRIGA',p:[we*0.45+0.6,yEnd*0.6],rot:90,bold:true,size:0.9});
 
   /* ---- ESPALDA ---- */
-  const back=new Piece('espalda','Espalda','Cortar 1 al doblez',{mat:opt.mat});
+  const back=new Piece('espalda','Espalda','Cortar 1 al doblez',{mat:opt.mat}); back.origin=[0,0];
   const LshF=G.dist(b,cc), LarmF=strokeLen(armF), LsideF=G.dist(d,e);
-  back.step(`Dibuja una línea vertical: el <b>doblez</b> (centro de la espalda, la columna). Arriba, el punto <b>A</b>: la nuca, donde empieza el largo de espalda.`);
-  const A=back.pt('A',[0,0],{lab:'nw'});
-  back.step(`${X('A','F')} = largo de espalda ${m(3)} ${E.largo<0?'−':'+'} ${fmt1(Math.abs(E.largo))} = ${c(L)}.${E.largo<0?' Se acorta para que la cola se mueva libre.':''}`);
-  const F=back.pt('F',[0,L],{lab:'w'}); back.guide(A,F,{dash:true});
-  back.step(`Escote. Desde <b>A</b> escuadra a la derecha ${c(nb)} y sube ${c(tilt)}: punto <b>B</b>. Une ${X('A','B')} con una curva que salga recta del doblez; debe medir ${c(0.3*N)}, el 60 % de medio escote.`);
-  const B=back.pt('B',[nb,-tilt],{lab:'n'}); back.guide([0,-tilt],B,{dash:true}); back.guide([0,-tilt],A,{dash:true});
+  back.st(`Traza una línea vertical: es el <b>doblez</b> (la columna). Arriba marca el punto <b>A</b>, la nuca.`,'Todos los puntos de esta pieza se miden desde A.');
+  const A=back.pos('A',0,0,'nuca (origen)','nw');
+  back.st(`${Cap(desde('A',L,0))}: punto <b>F</b>.`,`Largo de espalda (${fmt1(M[3])}) ${E.largo<0?'−':'+'} ${fmt1(Math.abs(E.largo))}.${E.largo<0?' Más corto para que la cola se mueva libre.':''}`);
+  const F=back.pos('F',L,0,'final, junto a la cola','w'); back.guide(A,F,{dash:true});
+  back.st(`Punto <b>B</b>: ${desde('A',-tilt,nb)}. Une ${X('A','B')} con una curva que salga recta del doblez: es el escote.`,`La espalda se lleva el 60 % del escote. Sube lo mismo que bajó b en la barriga.`);
+  const B=back.pos('B',-tilt,nb,'lado del cuello','n');
   const neckB=neckB_(nb); back.gcurve(neckB);
-  const xD=P/2-wb;
-  const cMax=xD-Math.max(1,S/8);                     // C nunca más afuera que la línea de pecho
-  let theta=18; if(B[0]+LshF*Math.cos(theta*Math.PI/180)>cMax){ theta=Math.acos(clamp((cMax-B[0])/LshF,-1,1))*180/Math.PI; }
-  back.step(`Costura de hombro. Desde <b>B</b> traza una recta que baje ${fmt1(theta)}° respecto a la horizontal y mide sobre ella ${c(LshF)} (lo mismo que ${X('b','c')} de la barriga): punto <b>C</b>, arriba de la sisa.`);
-  const C=back.pt('C',G.add(B,G.mul(G.dir(theta),LshF)),{lab:'ne'}); const shB=stroke(B,[{t:'L',p:C}]); back.guide(B,C);
-  const needArm=S-LarmF;
-  const depth=(Cp,Dp)=>Math.min(1.4,G.dist(Cp,Dp)*0.12);
+  const xD=P/2-wb, cMax=xD-Math.max(1,S/8);
+  let theta=18; if(B[0]+LshF*Math.cos(theta*Math.PI/180)>cMax) theta=Math.acos(clamp((cMax-B[0])/LshF,-1,1))*180/Math.PI;
+  const C=G.add(B,G.mul(G.dir(theta),LshF));
+  back.st(`Punto <b>C</b>: ${desde('A',C[1],C[0])}. Une ${X('B','C')} en recta: es la costura de hombro y mide ${c(LshF)}, igual que ${X('b','c')}.`,`Se coloca para que el hombro de la espalda mida lo mismo que el de la barriga.`);
+  back.pos('C',C[1],C[0],'arriba de la sisa','ne'); const shB=stroke(B,[{t:'L',p:C}]); back.guide(B,C);
+  const needArm=S-LarmF, depth=(Cp,Dp)=>Math.min(1.4,G.dist(Cp,Dp)*0.12);
   const mkArm=yD=>{ const D=[xD,yD]; const inn2=G.add(G.lerp(C,D,0.5),G.mul(G.norm(G.perp(G.sub(D,C))),depth(C,D)));
     return stroke(C,[curve(C,inn2,[0.15,1],G.sub(D,C),0.35),curve(inn2,D,G.sub(D,C),[0.2,1],0.35)]); };
   const yD=solveW(y=>strokeLen(mkArm(y))-needArm,C[1]+0.3,C[1]+80,'la sisa de la espalda');
   const D=[xD,yD];
-  back.step(`Línea de pecho. Ancho de espalda = pecho con holgura ÷ 2 − media barriga = (${m(2)} + ${fmt1(E.pecho)}) ÷ 2 − ${fmt1(wb)} = ${c(xD)}. Trázalo en horizontal a ${c(yD)} por debajo de la nuca: punto <b>D</b>. Une ${X('C','D')} con una curva que entre ${c(depth(C,D))} hacia el doblez en su mitad; debe medir ${c(needArm)} (sisa total, pata ${m(7)} + ${fmt1(E.sisa)} = ${fmt1(S)}, menos los ${fmt1(LarmF)} de la barriga).`);
-  back.pt('D',D,{lab:'e'}); back.guide([0,yD],D,{dash:true});
+  back.st(`Punto <b>D</b>: ${desde('A',yD,xD)}. Une ${X('C','D')} con una curva que entre ${c(depth(C,D))} en el centro: es la otra media sisa.`,`${fmt1(xD)} = la mitad del pecho con holgura (${fmt1(M[2])} + ${fmt1(E.pecho)}) menos la mitad de la barriga. La altura es la que hace que la sisa entera mida la pata (${fmt1(M[7])}) + ${fmt1(E.sisa)}.`);
+  back.pos('D',yD,xD,'axila, línea de pecho','e');
   const armB=mkArm(yD); back.gcurve(armB);
-  const xW=W/2-we; const dx=clamp(xD-xW,-0.5*LsideF,0.5*LsideF); const xE=xD-dx; const limited=Math.abs(xD-xW-dx)>0.05;
+  const xW=W/2-we, dx=clamp(xD-xW,-0.5*LsideF,0.5*LsideF), xE=xD-dx, limited=Math.abs(xD-xW-dx)>0.05;
   const yE=yD+Math.sqrt(LsideF*LsideF-dx*dx);
-  back.step(`Costado. Desde <b>D</b> traza una recta de ${c(LsideF)} (igual que ${X('d','e')} de la barriga) que acabe a ${c(xE)} del doblez: punto <b>E</b>. ${limited?`(La cintura pediría ${fmt1(xW)} cm, pero con una barriga tan corta la recta no llega; el resto del ajuste lo hace el faldón.)`:`(Cintura con holgura ÷ 2 − media barriga = (${m(4)} + ${fmt1(E.cintura)}) ÷ 2 − ${fmt1(we)}.)`}`);
-  const Ep=back.pt('E',[xE,yE],{lab:'e'}); const sideB=stroke(D,[{t:'L',p:Ep}]); back.guide(D,Ep);
-  back.step(`Faldón. Une <b>E</b> con <b>F</b> con una curva redondeada que llegue recta al doblez: cubre la cadera y deja libre la cola.`);
+  back.st(`Punto <b>E</b>: ${desde('A',yE,xE)}. Une ${X('D','E')} en recta: es el costado y mide ${c(LsideF)}, igual que ${X('d','e')}.`,limited?`La cintura pediría ${fmt1(xW)}, pero con una barriga tan corta la recta no llega: el resto del ajuste lo hace el faldón.`:`${fmt1(xE)} = la mitad de la cintura con holgura (${fmt1(M[4])} + ${fmt1(E.cintura)}) menos la mitad de la barriga.`);
+  const Ep=back.pos('E',yE,xE,'final del costado','e'); const sideB=stroke(D,[{t:'L',p:Ep}]); back.guide(D,Ep);
+  back.st(`Une ${X('E','F')} con una curva redondeada que llegue recta al doblez: es el faldón, que cubre la cadera.`,'');
   const hem=stroke(Ep,[curve(Ep,F,[-0.15,1],[-1,0],0.5,0.45)]); back.gcurve(hem);
-  back.step(`Repasa el contorno: escote ${X('A','B')}, hombro ${X('B','C')}, sisa ${X('C','D')}, costado ${X('D','E')} y faldón ${X('E','F')}. ${X('A','F')} va al doblez.`);
+  back.st(`Repasa el contorno con línea firme. El lado ${X('A','F')} va al doblez de la tela.`,'');
   back.edge('escote',neckB); back.edge('hombro',shB); back.edge('sisa',armB,'libre'); back.edge('costado',sideB); back.edge('faldon',hem,'libre');
   back.edge('doblez',stroke(F,[{t:'L',p:A}]),'doblez');
   back.grain=[[xD*0.35,L*0.3],[xD*0.35,L*0.75]]; back.labels.push({t:'ESPALDA',p:[xD*0.35+0.7,L*0.52],rot:90,bold:true,size:1.1});
   if(yE>L-1) WARN.push('el costado de la espalda llega casi al final: revisa largo de espalda (3) y de barriga (8)');
 
   const neckLen=2*(back.edgeLen('escote')+bel.edgeLen('escote'));
+  const seams=[
+    {what:'Escote de la espalda A–B',v:back.edgeLen('escote')},{what:'Escote de la barriga a–b',v:bel.edgeLen('escote')},
+    {what:'Hombro B–C = b–c',v:LshF},{what:'Sisa de la espalda C–D',v:back.edgeLen('sisa')},{what:'Sisa de la barriga c–d',v:LarmF},{what:'Costado D–E = d–e',v:LsideF}];
   const checks=[
     {what:'Costura de hombro: espalda B–C y barriga b–c',a:back.edgeLen('hombro'),b:bel.edgeLen('hombro'),tol:0.2},
     {what:'Costado: espalda D–E y barriga d–e',a:back.edgeLen('costado'),b:bel.edgeLen('costado'),tol:0.2},
-    {what:`Sisa (las dos curvas) y pata ${fmt1(M[7])} + ${fmt1(E.sisa)} de holgura`,a:back.edgeLen('sisa')+bel.edgeLen('sisa'),b:S,tol:0.3},
-    {what:`Escote completo y cuello ${fmt1(M[1])} + ${fmt1(E.cuello)} de holgura`,a:neckLen,b:N,tol:0.3},
-  ];
+    {what:`Sisa entera (C–D + c–d) y pata ${fmt1(M[7])} + ${fmt1(E.sisa)} de holgura`,a:back.edgeLen('sisa')+bel.edgeLen('sisa'),b:S,tol:0.3},
+    {what:`Escote entero y cuello ${fmt1(M[1])} + ${fmt1(E.cuello)} de holgura`,a:neckLen,b:N,tol:0.3}];
   if(M[11]!=null) checks.push({what:`Que pase la cabeza: escote frente a contorno de cara (${fmt1(M[11])}). Si no pasa, sube la holgura del cuello o abre 6–8 cm en el centro de la espalda con velcro.`,a:neckLen,b:M[11],min:true,tol:0});
-  return {back,bel,checks,N,P,W,S,L,lens:{neck:neckLen,arm:back.edgeLen('sisa')+bel.edgeLen('sisa'),armF:bel.edgeLen('sisa'),bottom:2*(back.edgeLen('faldon')+we)}};
+  return {back,bel,checks,seams,N,P,W,S,L,lens:{neck:neckLen,arm:back.edgeLen('sisa')+LarmF,armF:LarmF,bottom:2*(back.edgeLen('faldon')+we)}};
 }
 
 /* ===== Prendas ===== */
 const GARMENTS={
- abriguito:{name:'Abriguito',needs:['1','2','3','4','5','6','7','8'],sa:1,
+ abriguito:{name:'Abriguito',needs:['1','2','3','4','5','6','7','8'],sa:1,tela:'polar',
   ease:{cuello:{n:'Cuello (cm)',v:3,why:'Poca: el perro no tiene hombros y un cuello flojo hace que la prenda resbale hacia delante.'},pecho:{n:'Pecho (cm)',v:5,why:'Tela sin elasticidad: entre 4 y 6.'},cintura:{n:'Cintura (cm)',v:5,why:'Igual que el pecho.'},sisa:{n:'Sisa (cm)',v:3,why:'Que la pata entre sin roce.'},largo:{n:'Largo (cm)',v:-1,why:'Negativo = más corto que la espalda: acaba 1 cm antes de la cola.'}},
   easeSrc:'Valores de partida para tela sin elasticidad, tomados de guías publicadas de ropa para perro: milla milla (pecho +4–5, cuello +2–3), Celebdog (+4–6) y Aury Moda Pet (largo hasta 1 cm antes de la cola).',
-  draft(M,E){ CURM=M; WARN=[]; const bb=baseBlock(M,E,{mat:'Polar'});
-    const col=new Piece('cuello','Cuello alto','Cortar 1 (rectángulo)'); const nl=bb.lens.neck, ch=5;
-    col.step(`Rectángulo: ${X('1','2')} = escote completo de la prenda, 2 × (A–B + a–b) = ${c(nl)}; ${X('1','4')} = 2 × ${ch} = ${c(2*ch)}. Se dobla por la mitad a lo largo.`);
-    const p0=col.pt('1',[0,0],{lab:'nw'}),p1=col.pt('2',[nl,0],{lab:'ne'}),p2=col.pt('3',[nl,2*ch],{lab:'se'}),p3=col.pt('4',[0,2*ch],{lab:'sw'});
-    col.guide(p0,p1); col.guide(p1,p2); col.guide(p2,p3); col.guide(p3,p0);
-    col.step(`Marca la línea de doblez a ${c(ch)} y los piquetes: el centro de la espalda en la mitad (${c(nl/2)}) y las costuras de hombro a ${c(bb.lens.neck/2-0.3*bb.N)} de cada punta. Las puntas se unen en el centro de la barriga.`);
+  draft(M,E){ WARN=[]; const bb=baseBlock(M,E,{mat:'Polar'});
+    const col=new Piece('cuello','Cuello alto','Cortar 1 (rectángulo)'); col.origin=[0,0]; const nl=bb.lens.neck, ch=5;
+    col.st(`Dibuja un rectángulo de ${c(nl)} de largo por ${c(2*ch)} de alto: puntos <b>1</b>, <b>2</b>, <b>3</b> y <b>4</b>.`,`El largo es el escote entero de la prenda; el alto, el doble del cuello (${ch} cm), porque se dobla por la mitad.`);
+    col.pos('1',0,0,'esquina (origen)','nw'); const p1=col.pos('2',0,nl,'esquina','ne'), p2=col.pos('3',2*ch,nl,'esquina','se'), p3=col.pos('4',2*ch,0,'esquina','sw');
+    const p0=[0,0]; col.guide(p0,p1); col.guide(p1,p2); col.guide(p2,p3); col.guide(p3,p0);
+    col.st(`Marca la línea de doblez a ${c(ch)} de altura. Piquetes en el borde de abajo: la mitad (${c(nl/2)}) va al centro de la espalda; a ${c(0.2*bb.N)} de cada punta, las costuras de hombro.`,'Las dos puntas se unen en el centro de la barriga.');
     col.guide([0,ch],[nl,ch],{dash:true});
     col.edge('a',stroke(p0,[{t:'L',p:p1}]),'libre'); col.edge('b',stroke(p1,[{t:'L',p:p2}])); col.edge('c',stroke(p2,[{t:'L',p:p3}]),'libre'); col.edge('d',stroke(p3,[{t:'L',p:p0}]));
     col.grain=[[nl*0.35,ch*0.5],[nl*0.65,ch*0.5]]; col.labels.push({t:'CUELLO · doblar aquí',p:[nl/2,ch-0.3],size:0.7});
     const cut=[{what:'Espalda',mat:'Polar',qty:'1 al doblez'},{what:'Barriga',mat:'Polar',qty:'1 al doblez'},{what:'Cuello alto',mat:'Polar',qty:'1'},
       {what:`Ribete de sisas: tira de 4 × ${fmt1(bb.lens.arm+2)} cm`,mat:'Polar',qty:'2'}];
-    return {pieces:[bb.back,bb.bel,col],checks:bb.checks,cut,warn:WARN};
+    return {pieces:[bb.back,bb.bel,col],checks:bb.checks,seams:bb.seams,cut,warn:WARN};
   }},
- hoodie:{name:'Hoodie',needs:['1','2','3','4','5','6','7','8','11','12'],sa:1,
+ hoodie:{name:'Hoodie',needs:['1','2','3','4','5','6','7','8','11','12'],sa:1,tela:'moletón',
   ease:{cuello:{n:'Cuello (cm)',v:3,why:'La capucha va cosida aquí. Poca holgura: si no, la prenda resbala hacia delante.'},pecho:{n:'Pecho (cm)',v:4,why:'El moletón casi no estira: entre 3 y 5.'},cintura:{n:'Cintura (cm)',v:4,why:'Igual que el pecho.'},sisa:{n:'Sisa (cm)',v:3,why:'Lleva manga: que la pata entre bien.'},largo:{n:'Largo (cm)',v:-4,why:'Más corto: la pretina de ribb añade unos 3 cm.'},ribb:{n:'Ribb, % de la abertura',v:75,why:'El ribb se corta más corto que la abertura para que ajuste: de 2/3 a 75 %.'},cara:{n:'Cara (cm)',v:4,why:'Abertura de la capucha.'},capucha:{n:'Capucha, fondo (cm)',v:4,why:'Cuánto sobra por encima de la cabeza.'}},
   easeSrc:'Moletón: casi no estira, así que holguras de tela no elástica algo más justas (milla milla, Celebdog). Ribb al 75 % de la abertura (FreeSewing; Sapolina usa 2/3). La barriga se acorta 3 cm por la pretina, para que no tape el pene en los machos.',
-  draft(M,E){ CURM=M; WARN=[]; const bb=baseBlock(M,E,{mat:'Moletón',bellyShort:3});
+  draft(M,E){ WARN=[]; const bb=baseBlock(M,E,{mat:'Moletón',bellyShort:3});
     /* capucha (media) */
-    const hd=new Piece('capucha','Capucha','Cortar 2 (una y su simétrica)');
+    const hd=new Piece('capucha','Capucha','Cortar 2 (una y su simétrica)'); hd.origin=[0,0];
     const base=bb.lens.neck/2, front=(M[11]+E.cara)/2, top0=M[12]+E.capucha;
-    hd.step(`Base de la capucha: ${X('H','I')} = medio escote de la prenda = ${c(base)}. <b>H</b> va al centro de la barriga y <b>I</b> al centro de la espalda.`);
-    const H=hd.pt('H',[0,0],{lab:'sw'}); const I=hd.pt('I',[base,0],{lab:'se'}); hd.guide(H,I);
-    hd.step(`Borde de la cara: desde <b>H</b> sube en escuadra ${X('H','J')} = (contorno de cara ${m(11)} + ${fmt1(E.cara)}) ÷ 2 = ${c(front)}.`);
-    const J=hd.pt('J',[0,-front],{lab:'nw'}); hd.guide(H,J,{dash:true});
-    const chord=G.dist(I,J); const top=Math.max(top0,chord+1.5);
-    const nrm=G.norm(G.perp(G.sub(J,I))); const out=nrm[0]>0?nrm:G.mul(nrm,-1); const midIJ=G.lerp(I,J,0.5); const tIJ=G.sub(J,I);
+    hd.st(`Traza una línea horizontal. A la izquierda marca <b>H</b>; ${desde('H',0,base)}: punto <b>I</b>. ${X('H','I')} se cose al escote.`,`${fmt1(base)} = la mitad del escote de la prenda. H va al centro de la barriga e I al centro de la espalda.`);
+    const H=hd.pos('H',0,0,'centro de la barriga (origen)','sw'); const I=hd.pos('I',0,base,'centro de la espalda','se'); hd.guide(H,I);
+    hd.st(`${Cap(desde('H',-front,0))}: punto <b>J</b>. ${X('H','J')} es el borde de la cara.`,`La mitad del contorno de cara (${fmt1(M[11])}) + ${fmt1(E.cara)} de holgura.`);
+    const J=hd.pos('J',-front,0,'frente','nw'); hd.guide(H,J,{dash:true});
+    const chord=G.dist(I,J), top=Math.max(top0,chord+1.5);
+    const nrm=G.norm(G.perp(G.sub(J,I))), out=nrm[0]>0?nrm:G.mul(nrm,-1), midIJ=G.lerp(I,J,0.5), tIJ=G.sub(J,I);
     const mk=h=>{ const K=G.add(midIJ,G.mul(out,h)); return stroke(I,[curve(I,K,G.sub(K,I),tIJ,0.4),curve(K,J,tIJ,G.sub(J,K),0.4)]); };
-    const hh=solveW(h=>strokeLen(mk(h))-top,0,2*base+front,'la capucha'); const backSeam=mk(hh);
-    hd.step(`Fondo: une ${X('I','J')} en recta (${fmt1(chord)} cm). En su mitad, sal hacia fuera en escuadra ${c(hh)}: punto <b>K</b>. Une I–K–J con una curva suave: es la costura central (nuca, cabeza, frente) y debe medir ${c(top)}${top>top0+0.05?` (el alto de capucha ${m(12)} + ${fmt1(E.capucha)} daría ${fmt1(top0)}, menos que la recta: se alarga para que la capucha tenga fondo)`:` (alto de capucha ${m(12)} + ${fmt1(E.capucha)})`}.`);
-    hd.pt('K',G.add(midIJ,G.mul(out,hh)),{lab:'e'}); hd.guide(I,J,{dash:true}); hd.gcurve(backSeam);
-    hd.step(`Repasa: base ${X('H','I')} (va al escote), costura central ${X('I','J')} y borde de cara ${X('J','H')} (lleva dobladillo o ribb).`);
+    const hh=solveW(h=>strokeLen(mk(h))-top,0,2*base+front,'la capucha'); const backSeam=mk(hh); const K=G.add(midIJ,G.mul(out,hh));
+    hd.st(`Punto <b>K</b>: ${desde('H',K[1],K[0])}. Une I–K–J con una curva suave: es la costura central (nuca, cabeza, frente) y mide ${c(top)}.`,top>top0+0.05?`El alto de capucha (${fmt1(M[12])}) + ${fmt1(E.capucha)} daría ${fmt1(top0)}, menos que la recta I–J: se alarga para que la capucha tenga fondo.`:`Alto de capucha (${fmt1(M[12])}) + ${fmt1(E.capucha)} de fondo.`);
+    hd.pos('K',K[1],K[0],'costura central','e'); hd.gcurve(backSeam);
+    hd.st(`Repasa el contorno con línea firme. ${X('J','H')} lleva dobladillo o ribb.`,'');
     hd.edge('base',stroke(H,[{t:'L',p:I}])); hd.edge('central',backSeam); hd.edge('cara',stroke(J,[{t:'L',p:H}]),'libre');
     hd.grain=[[base*0.3,-front*0.2],[base*0.3,-front*0.8]]; hd.labels.push({t:'CAPUCHA',p:[base*0.3+0.6,-front*0.5],rot:90,bold:true,size:0.8});
     /* manga corta */
-    const sl=new Piece('manga','Manga','Cortar 2'); const S=bb.lens.arm, sh=Math.max(3,M[7]*0.4), cap=S/9, cuff=M[7];
-    sl.step(`Ancho de manga = sisa de la prenda (las dos curvas) = ${c(S)}: ${X('M','N')}. El lado <b>M</b> irá hacia la barriga.`);
-    const Mm=sl.pt('M',[0,0],{lab:'nw'}), Nn=sl.pt('N',[S,0],{lab:'ne'}); sl.guide(Mm,Nn,{dash:true});
+    const sl=new Piece('manga','Manga','Cortar 2'); sl.origin=[0,0]; const S=bb.lens.arm, sh=Math.max(3,M[7]*0.4), cap=S/9, cuff=M[7];
+    sl.st(`Traza una horizontal. A la izquierda marca <b>M</b>; ${desde('M',0,S)}: punto <b>N</b>.`,`${fmt1(S)} = lo que mide la sisa entera de la prenda (C–D + c–d). M irá hacia la barriga.`);
+    const Mm=sl.pos('M',0,0,'costado, lado barriga (origen)','nw'), Nn=sl.pos('N',0,S,'costado, lado espalda','ne'); sl.guide(Mm,Nn,{dash:true});
     const capSt=stroke(Mm,[curve(Mm,[S/2,-cap],[1,-0.5],[1,0],0.4),curve([S/2,-cap],Nn,[1,0],[1,0.5],0.4)]);
     const cps=strokePts(capSt,120); let acc=0, Pp=cps[0]; const tgt=bb.lens.armF;
     for(let i=1;i<cps.length;i++){ const dd=G.dist(cps[i-1],cps[i]); if(acc+dd>=tgt){ Pp=G.lerp(cps[i-1],cps[i],(tgt-acc)/dd); break; } acc+=dd; }
-    sl.step(`Copa: en el centro sube ${c(cap)} (sisa ÷ 9): punto <b>O</b>. Une M–O–N con una curva suave. Marca el piquete <b>P</b> a ${c(tgt)} de M midiendo por la curva: va a la costura de hombro (c/C). M y N se unen y van al costado (d/D).`);
-    sl.pt('O',[S/2,-cap],{lab:'n'}); sl.pt('P',Pp,{lab:'n'}); sl.gcurve(capSt);
-    sl.step(`Largo: baja ${c(sh)} (pata ÷ 2,5, mínimo 3 cm) y estrecha el bajo hasta ${c(cuff)} (el contorno de pata, ${m(7)}), repartido a los dos lados: puntos <b>Q</b> y <b>R</b>.`);
-    const Q=sl.pt('Q',[(S-cuff)/2,sh],{lab:'sw'}), R=sl.pt('R',[(S+cuff)/2,sh],{lab:'se'}); sl.guide(Mm,Q); sl.guide(Nn,R); sl.guide(Q,R);
-    sl.step(`Repasa: copa M–P–O–N (va a la sisa), costados ${X('N','R')} y ${X('Q','M')} (se cosen entre sí) y bajo ${X('Q','R')} (lleva el puño).`);
+    sl.st(`Punto <b>O</b>: ${desde('M',-cap,S/2)}. Une M–O–N con una curva suave: es la copa. Marca el piquete <b>P</b> sobre la curva, a ${c(tgt)} de M.`,`La copa sube la novena parte de su ancho. P va a la costura de hombro (c/C); M y N, al costado.`);
+    sl.pos('O',-cap,S/2,'centro de la copa','n'); sl.pt('P',Pp,{lab:'n'}); sl.gcurve(capSt);
+    sl.st(`Punto <b>Q</b>: ${desde('M',sh,(S-cuff)/2)}. Punto <b>R</b>: ${desde('M',sh,(S+cuff)/2)}. Une M–Q, N–R y Q–R.`,`El largo es la pata entre 2,5 (mínimo 3 cm). El bajo, Q–R, mide el contorno de la pata (${fmt1(M[7])}).`);
+    const Q=sl.pos('Q',sh,(S-cuff)/2,'bajo','sw'), R=sl.pos('R',sh,(S+cuff)/2,'bajo','se'); sl.guide(Mm,Q); sl.guide(Nn,R); sl.guide(Q,R);
+    sl.st(`Repasa el contorno con línea firme. Q–R lleva el puño de ribb.`,'');
     sl.edge('copa',capSt); sl.edge('lado2',stroke(Nn,[{t:'L',p:R}])); sl.edge('bajo',stroke(R,[{t:'L',p:Q}]),'libre'); sl.edge('lado1',stroke(Q,[{t:'L',p:Mm}]));
     sl.grain=[[S/2,0.4],[S/2,sh-0.4]];
     const checks=bb.checks.concat([
       {what:'Copa de la manga y sisa de la prenda (la copa puede tener hasta 1 cm más, que se embebe)',a:sl.edgeLen('copa'),b:S,tol:1},
       {what:'Base de capucha (×2) y escote de la prenda',a:2*hd.edgeLen('base'),b:bb.lens.neck,tol:0.3},
       {what:'Costura central de capucha y lo que pide el paso',a:hd.edgeLen('central'),b:top,tol:0.3}]);
+    const seams=bb.seams.concat([{what:'Copa de la manga M–P–N',v:sl.edgeLen('copa')},{what:'Costura central de la capucha I–K–J',v:hd.edgeLen('central')}]);
     const ribBottom=bb.lens.bottom*E.ribb/100, ribCuff=cuff*E.ribb/100;
     const cut=[{what:'Espalda',mat:'Moletón',qty:'1 al doblez'},{what:'Barriga',mat:'Moletón',qty:'1 al doblez'},{what:'Capucha',mat:'Moletón',qty:'2'},{what:'Manga',mat:'Moletón',qty:'2'},
       {what:`Pretina del bajo: ${fmt1(ribBottom)} × 7 cm (${fmt1(E.ribb)} % del bajo, que mide ${fmt1(bb.lens.bottom)} cm)`,mat:'Ribb',qty:'1'},
       {what:`Puños: ${fmt1(ribCuff)} × 6 cm (${fmt1(E.ribb)} % del bajo de manga)`,mat:'Ribb',qty:'2'}];
-    return {pieces:[bb.back,bb.bel,hd,sl],checks,cut,warn:WARN};
+    return {pieces:[bb.back,bb.bel,hd,sl],checks,seams,cut,warn:WARN};
   }},
- calzon:{name:'Calzón de celo',needs:['4','9','10'],sa:0.7,
+ calzon:{name:'Calzón de celo',needs:['4','9','10'],sa:0.7,tela:'jersey',
   ease:{cintura:{n:'Cintura (cm)',v:2,why:'La tela, algo más que la cintura: el elástico la recoge.'},muslo:{n:'Pierna (cm)',v:2,why:'Ídem en la abertura de la pierna.'},trasera:{n:'Trasera sobre la cola (cm)',v:5,why:'Diseño: cuánto sube la espalda por encima de la cola.'},cola:{n:'Agujero de cola, alto (cm)',v:3.5,why:'Pequeño: ajústalo a la cola de cada perra.'}},
   easeSrc:'Un calzón de una pieza como el de usatiki.ru: ancho de media cintura y largo igual al tiro. Elástico de cintura algo menor que la cintura (las guías van del 70 % al 85 %); tela de punto (jersey o canalé) para que transpire con la compresa. En un patrón de Mimi & Tara el agujero de la cola quedó demasiado bajo y hubo que subirlo: si pasa, baja aquí «Trasera sobre la cola».',
-  draft(M,E){ CURM=M; WARN=[];
-    const pc=new Piece('calzon','Calzón','Cortar 1 al doblez');
+  draft(M,E){ WARN=[];
+    const pc=new Piece('calzon','Calzón','Cortar 1 al doblez'); pc.origin=[0,0];
     const Wq=(M[4]+E.cintura)/4, Lt=E.trasera+M[10], yK=E.trasera+0.45*M[10], cw=Math.max(2,M[9]/6), leg=M[9]+E.muslo;
-    pc.step(`Línea vertical = <b>doblez</b> (el centro: lomo, cola, entre las patas y barriga). Arriba <b>A</b>, la cintura por el lomo. ${X('A','D')} = trasera sobre la cola + tiro ${m(10)} = ${fmt1(E.trasera)} + ${fmt1(M[10])} = ${c(Lt)}. <b>D</b> es la cintura por la barriga.`);
-    const A=pc.pt('A',[0,0],{lab:'nw'}), D=pc.pt('D',[0,Lt],{lab:'sw'}); pc.guide(A,D,{dash:true});
-    pc.step(`Cintura: ${X('A','B')} y ${X('D','C')} = (cintura ${m(4)} + ${fmt1(E.cintura)}) ÷ 4 = ${c(Wq)}, en escuadra.`);
-    const B=pc.pt('B',[Wq,0],{lab:'ne'}), Cc=pc.pt('C',[Wq,Lt],{lab:'se'}); pc.guide(A,B); pc.guide(D,Cc);
-    pc.step(`Cola: ${X('A','T')} = ${c(E.trasera)}. En <b>T</b>, sobre el doblez, dibuja medio óvalo de ${c(E.cola)} de alto y ${c(E.cola*0.35)} de ancho: al abrir la tela queda el agujero de la cola.`);
-    pc.pt('T',[0,E.trasera],{lab:'w'});
+    pc.st(`Traza una línea vertical: es el <b>doblez</b> (el centro: lomo, cola, entre las patas y barriga). Arriba marca <b>A</b>, la cintura por el lomo; ${desde('A',Lt,0)}: punto <b>D</b>, la cintura por la barriga.`,`${fmt1(E.trasera)} cm por encima de la cola + el tiro (${fmt1(M[10])}).`);
+    const A=pc.pos('A',0,0,'cintura por el lomo (origen)','nw'), D=pc.pos('D',Lt,0,'cintura por la barriga','sw'); pc.guide(A,D,{dash:true});
+    pc.st(`Punto <b>B</b>: ${desde('A',0,Wq)}. Punto <b>C</b>: ${desde('A',Lt,Wq)}. Une ${X('A','B')} y ${X('D','C')}: son las cinturas.`,`La cuarta parte de la cintura (${fmt1(M[4])}) + ${fmt1(E.cintura)} de holgura.`);
+    const B=pc.pos('B',0,Wq,'cintura, costado','ne'), Cc=pc.pos('C',Lt,Wq,'cintura, costado','se'); pc.guide(A,B); pc.guide(D,Cc);
+    pc.st(`Punto <b>T</b>: ${desde('A',E.trasera,0)}. Sobre el doblez, dibuja medio óvalo de ${c(E.cola)} de alto y ${c(E.cola*0.35)} de ancho, con T en el centro: al abrir la tela queda el agujero de la cola.`,'Pequeño: si no pasa la cola, se agranda en la prueba.');
+    pc.pos('T',E.trasera,0,'centro del agujero de la cola','w');
     const th=E.cola, tw=E.cola*0.35; const tail=stroke([0,E.trasera-th/2],[curve([0,E.trasera-th/2],[tw,E.trasera],[1,0],[0,1],0.55),curve([tw,E.trasera],[0,E.trasera+th/2],[0,1],[-1,0],0.55)]);
     pc.gcurve(tail); pc.hole=tail;
-    pc.step(`Entrepierna: ${X('A','K')} = trasera + 45 % del tiro = ${c(yK)}. Escuadra ${c(cw)} (muslo ${m(9)} ÷ 6, mínimo 2): punto <b>k</b>.`);
-    const K=pc.pt('K',[0,yK],{lab:'w'}), k=pc.pt('k',[cw,yK],{lab:'e'}); pc.guide(K,k,{dash:true});
+    pc.st(`Punto <b>k</b>: ${desde('A',yK,cw)}. Es la entrepierna.`,`Bajada: ${fmt1(E.trasera)} + el 45 % del tiro. Ancho: el muslo (${fmt1(M[9])}) entre 6, mínimo 2 cm.`);
+    const k=pc.pos('k',yK,cw,'entrepierna','e');
     const mk=s=>{ const P1=[Wq,s],P2=[Wq,Lt-s]; return stroke(P1,[curve(P1,k,[-0.35,1],[-0.15,1],0.5,0.4),curve(k,P2,[0.15,1],[0.35,1],0.4,0.5)]); };
     const s=solveW(x=>leg-strokeLen(mk(x)),0.3,Math.min(yK,Lt-yK)-0.3,'la abertura de pierna');
-    pc.step(`Costados: baja ${c(s)} desde <b>B</b> y sube lo mismo desde <b>C</b>: puntos <b>E</b> y <b>F</b>. Une E–k–F con una curva que pase por <b>k</b> sin hacer pico; debe medir el muslo ${m(9)} + ${fmt1(E.muslo)} = ${c(leg)}.`);
-    const Ep=pc.pt('E',[Wq,s],{lab:'e'}), Fp=pc.pt('F',[Wq,Lt-s],{lab:'e'}); const legSt=mk(s); pc.guide(B,Ep); pc.guide(Fp,Cc); pc.gcurve(legSt);
-    pc.step(`Repasa: cintura trasera ${X('A','B')}, costado ${X('B','E')}, pierna ${X('E','F')}, costado ${X('F','C')} y cintura delantera ${X('C','D')}. Se cosen ${X('B','E')} con ${X('C','F')}. En las cinturas deja 1,8 cm de margen (jareta para el elástico) y en las piernas 1,2 cm.`);
+    pc.st(`Punto <b>E</b>: ${desde('A',s,Wq)}. Punto <b>F</b>: ${desde('A',Lt-s,Wq)}. Une E–k–F con una curva que pase por k sin hacer pico: es la pierna y mide ${c(leg)}.`,`La pierna mide el muslo (${fmt1(M[9])}) + ${fmt1(E.muslo)}. E y F se colocan para que salga justo esa medida.`);
+    const Ep=pc.pos('E',s,Wq,'costado','e'), Fp=pc.pos('F',Lt-s,Wq,'costado','e'); const legSt=mk(s); pc.guide(B,Ep); pc.guide(Fp,Cc); pc.gcurve(legSt);
+    pc.st(`Repasa el contorno con línea firme. Se cosen ${X('B','E')} con ${X('C','F')}. En las cinturas deja 1,8 cm de margen (jareta para el elástico) y en las piernas 1,2 cm.`,'');
     pc.edge('cintura1',stroke(A,[{t:'L',p:B}]),'libre',{sa:1.8}); pc.edge('costado1',stroke(B,[{t:'L',p:Ep}])); pc.edge('pierna',legSt,'libre',{sa:1.2});
     pc.edge('costado2',stroke(Fp,[{t:'L',p:Cc}])); pc.edge('cintura2',stroke(Cc,[{t:'L',p:D}]),'libre',{sa:1.8}); pc.edge('doblez',stroke(D,[{t:'L',p:A}]),'doblez');
     pc.grain=[[Wq*0.6,Lt*0.62],[Wq*0.6,Lt*0.9]]; pc.labels.push({t:'CALZÓN',p:[Wq*0.6+0.7,Lt*0.76],rot:90,bold:true,size:0.8});
     const checks=[{what:`Abertura de pierna y muslo ${fmt1(M[9])} + ${fmt1(E.muslo)}`,a:pc.edgeLen('pierna'),b:leg,tol:0.3}];
+    const seams=[{what:'Costado B–E = C–F',v:s},{what:'Pierna E–k–F',v:pc.edgeLen('pierna')}];
     const cut=[{what:'Calzón',mat:'Jersey',qty:'1 al doblez'},{what:`Elástico de cintura: ${fmt1(M[4]*0.8+1)} cm (80 % de la cintura + 1 de cruce)`,mat:'Elástico 1 cm',qty:'1'},
       {what:`Elástico de pierna: ${fmt1(M[9]*0.85+1)} cm (85 % del muslo + 1)`,mat:'Elástico 1 cm',qty:'2'},
       {what:'Compresa: pegada por dentro, en la zona de la entrepierna',mat:'—',qty:'—'}];
-    return {pieces:[pc],checks,cut,warn:WARN};
+    return {pieces:[pc],checks,seams,cut,warn:WARN};
   }}
 };
 /* ---------- Interfaz ---------- */
@@ -665,7 +725,7 @@ function redraw(resetStep){
   try{ result=g.draft(m,easeFor(garment)); }catch(err){ $('work').hidden=true; $('missing').hidden=false; $('missing').textContent='No se ha podido trazar con estas medidas: '+err.message; return; }
   if(pieceIdx>=result.pieces.length) pieceIdx=0;
   if(resetStep) stepIdx=0;
-  renderPieceTabs(); renderPiece(); renderChecks(); renderCutList();
+  renderFicha(); renderPieceTabs(); renderPiece(); renderChecks(); renderCutList();
 }
 function renderPieceTabs(){ $('pieceTabs').innerHTML=result.pieces.map((p,i)=>`<button type="button" role="tab" aria-selected="${i===pieceIdx}" data-p="${i}">${esc(p.name)}</button>`).join('')+`<button type="button" role="tab" aria-selected="${pieceIdx===-1}" data-p="-1">Todas</button>`; }
 $('pieceTabs').addEventListener('click',e=>{ const b=e.target.closest('[data-p]'); if(!b) return; pieceIdx=+b.dataset.p; stepIdx=0; renderPieceTabs(); renderPiece(); });
@@ -678,9 +738,9 @@ function renderPiece(){
   const p=result.pieces[pieceIdx]; const n=p.steps.length; stepIdx=Math.max(0,Math.min(stepIdx,n-1));
   $('stepNav').hidden=false;
   $('stage').innerHTML=`<figure class="one"><figcaption><b>${esc(p.name)}</b> · ${esc(p.cut)}</figcaption>${svgPiece(p,{upto:stepIdx,sa:sa(),showSA:$('showSA').checked})}</figure>`;
-  $('stepCount').textContent=`Paso ${stepIdx+1} de ${n}`; $('nowStep').hidden=false; $('nowStep').innerHTML=`<b>${stepIdx+1}.</b> ${p.steps[stepIdx].html}`;
+  $('stepCount').textContent=`Paso ${stepIdx+1} de ${n}`; $('nowStep').hidden=false; $('nowStep').innerHTML=`<b>${stepIdx+1}.</b> ${p.steps[stepIdx].html}${p.steps[stepIdx].why?`<small class="src">${p.steps[stepIdx].why}</small>`:''}`;
   $('prev').disabled=stepIdx===0; $('next').disabled=stepIdx===n-1;
-  $('steps').innerHTML=p.steps.map((s,i)=>`<li class="${i===stepIdx?'on':i<stepIdx?'done':''}" data-s="${i}"><button type="button" class="sbtn" data-s="${i}"><span>${s.html}</span></button></li>`).join('')
+  $('steps').innerHTML=p.steps.map((s,i)=>`<li class="${i===stepIdx?'on':i<stepIdx?'done':''}" data-s="${i}"><button type="button" class="sbtn" data-s="${i}"><span>${s.html}${s.why?`<small class="src">${s.why}</small>`:''}</span></button></li>`).join('')
     + (p.notes.length?`<li class="pnotes">${p.notes.map(x=>`<p>${x}</p>`).join('')}</li>`:'');
   const on=$('steps').querySelector('li.on'); if(on&&window.__stepScroll) on.scrollIntoView({block:'nearest',behavior:'smooth'}); window.__stepScroll=false;
 }
@@ -691,6 +751,33 @@ $('last').addEventListener('click',()=>{ stepIdx=1e9; renderPiece(); });
 $('showSA').addEventListener('change',renderPiece);
 document.addEventListener('keydown',e=>{ if(e.target.closest('input,textarea,select')) return; if(e.key==='ArrowRight'&&!$('next').disabled){stepIdx++;renderPiece();} if(e.key==='ArrowLeft'&&!$('prev').disabled){stepIdx--;renderPiece();} });
 
+function who(){ return sel.value.startsWith('dog:')?sel.value.slice(4):sel.value==='ejemplo'?'perro de ejemplo':'medidas a mano'; }
+function renderFicha(){
+  const g=GARMENTS[garment], m=readMeas(), E=easeFor(garment);
+  const dog=sel.value.startsWith('dog:')?latestFor(sel.value.slice(4)):null;
+  const signed=v=>(v<-0.05?'sube ':v>0.05?'baja ':'')+(Math.abs(v)>0.05?fmt1(Math.abs(v)):'—');
+  let h=`<header class="fhead"><div><div class="eyebrow">Molde técnico · ${esc(g.name)}</div><h2>${esc(g.name)} para ${esc(who())}</h2>
+    <p class="note">Tela: ${esc(g.tela)} · Margen de costura: ${fmt1(g.sa)} cm en todo el contorno, salvo en el doblez${dog&&dog.fecha?` · Medidas del ${esc(dog.fecha.split('-').reverse().join('/'))}`:''}</p></div>
+    <div class="flegend"><span><i></i>contorno del molde</span><span><i class="fold"></i>doblez de la tela</span><span><i class="sa"></i>línea de corte (con margen)</span><span><i class="g"></i>línea de ayuda</span></div></header>`;
+  result.pieces.forEach((p,i)=>{
+    const o=(p.table||[])[0]; const on=o?o.name:'';
+    h+=`<article class="fpiece"><div class="fdraw"><h3>${i+1}. ${esc(p.name)} <small>${esc(p.cut)}</small></h3>${svgPiece(p,{upto:Infinity,sa:sa(),showSA:true})}</div>
+      <div class="ftext"><h4>Paso a paso</h4><ol class="fsteps">${p.steps.map(s=>`<li>${s.html}${s.why?`<small class="src">${s.why}</small>`:''}</li>`).join('')}</ol>
+      ${p.table&&p.table.length>1?`<h4>Puntos (desde ${esc(on)}, en cm)</h4><table class="pts"><thead><tr><th>Punto</th><th>Baja / sube</th><th>Escuadra →</th><th>Qué es</th></tr></thead><tbody>${p.table.map(r=>`<tr><td><b>${r.name}</b></td><td class="v">${signed(r.down)}</td><td class="v">${Math.abs(r.right)>0.05?fmt1(r.right):'—'}</td><td>${esc(r.what)}</td></tr>`).join('')}</tbody></table>`:''}</div></article>`;
+  });
+  h+=`<div class="fgrid">
+    <div class="fbox"><h4>Qué cortar</h4><table class="pts"><tbody>${result.cut.map(r=>`<tr><td>${r.what}</td><td>${r.mat}</td><td class="v">${r.qty}</td></tr>`).join('')}</tbody></table></div>
+    <div class="fbox"><h4>Lo que mide cada costura</h4><table class="pts"><tbody>${(result.seams||[]).map(s=>`<tr><td>${esc(s.what)}</td><td class="v">${fmt1(s.v)} cm</td></tr>`).join('')}</tbody></table><p class="note">Las curvas se miden con la cinta métrica de canto. Lo que se cose junto mide lo mismo.</p></div>
+    <div class="fbox"><h4>Medidas de ${esc(who())}</h4><table class="pts"><tbody>${g.needs.map(k=>`<tr><td><span class="code">${k}</span> ${esc(MEAS.find(x=>x.id===k).n)}</td><td class="v">${fmt1(m[k])} cm</td></tr>`).join('')}</tbody></table>
+      <p class="note">Holguras: ${Object.entries(g.ease).map(([k,x])=>`${esc(x.n.replace(' (cm)','').toLowerCase())} ${fmt1(E[k])}`).join(' · ')}</p></div>
+    <div class="fbox"><h4>Consejos</h4><ul>
+      <li>Primero, una prueba en tela barata. Si algo tira o sobra, cambia la holgura en la página y vuelve a sacar el molde: no corrijas el papel a mano.</li>
+      <li>Traza a lápiz con escuadra: «baja» es por el doblez y «escuadra» es en ángulo recto hacia la derecha.</li>
+      <li>El molde es media pieza: se corta sobre la tela doblada, con el doblez donde lo indica.</li>
+      <li>Para imprimir a tamaño real, comprueba antes el cuadrado de 10 × 10 cm de la primera hoja.</li></ul></div>
+  </div>`;
+  $('fichaBody').innerHTML=h;
+}
 const checkOk=c=>c.min?c.a>=c.b-c.tol:Math.abs(c.a-c.b)<=c.tol;
 function renderChecks(){
   const bad=result.checks.filter(c=>!checkOk(c)), w=result.warn||[];
@@ -707,11 +794,9 @@ $('printReal').addEventListener('click',()=>{
   $('printArea').innerHTML=t.html; document.body.classList.add('printing-sheets');
   setTimeout(()=>{ window.print(); },60);
 });
-$('printSteps').addEventListener('click',()=>{
-  const g=GARMENTS[garment];
-  $('printArea').innerHTML=`<section class="stepsheet"><h2>${esc(g.name)} · trazado paso a paso</h2>`+result.pieces.map(p=>`<h3>${esc(p.name)} <small>${esc(p.cut)}</small></h3><div class="ss">${svgPiece(p,{upto:Infinity,sa:sa(),showSA:false})}<ol>${p.steps.map(s=>`<li>${s.html}</li>`).join('')}</ol></div>`).join('')+'</section>';
-  document.body.classList.add('printing-steps'); setTimeout(()=>window.print(),60);
-});
+function printFicha(){ $('printArea').innerHTML=`<div class="fichaprint">${$('fichaBody').innerHTML}</div>`; document.body.classList.add('printing-steps'); setTimeout(()=>window.print(),60); }
+$('printSteps').addEventListener('click',printFicha); $('printFicha').addEventListener('click',printFicha);
+$('printReal2').addEventListener('click',()=>$('printReal').click());
 window.addEventListener('afterprint',()=>{ document.body.classList.remove('printing-sheets','printing-steps'); $('printArea').innerHTML=''; });
 
 renderGarmentTabs(); renderEase(); renderMeasEditor(measFromSource()); redraw(true);
